@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resources - The AtePlant Archive</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bark:    #2a1f14;
+      --bark2:   #1e1508;
+      --bark3:   #160f08;
+      --leaf:    #6fba5e;
+      --stone:   #8a8070;
+      --parch:   #e8dfc8;
+      --cream:   #f5f0e4;
+      --glow:    #a8d97f;
+      --dim:     rgba(232,223,200,0.65);
+      --sidebar-w: 260px;
+      --nav-h:     80px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      background:var(--bark);color:var(--parch);
+      font-family:'Crimson Pro',Georgia,serif;font-weight:300;
+      min-height:100vh;overflow-x:hidden;
+    }
+    body::before{
+      content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+      background:
+        radial-gradient(ellipse 80% 55% at 15% 8%,rgba(61,107,58,.13) 0%,transparent 60%),
+        radial-gradient(ellipse 55% 75% at 85% 92%,rgba(61,107,58,.08) 0%,transparent 60%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%232a1f14'/%3E%3Crect x='0' y='0' width='1' height='1' fill='%2322180f' opacity='.6'/%3E%3Crect x='2' y='2' width='1' height='1' fill='%23301f10' opacity='.4'/%3E%3C/svg%3E");
+    }
+
+    /* ═══ NAVBAR ═══ */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:200;
+      display:flex;align-items:center;
+      padding:0 2rem;height:var(--nav-h);
+      background:rgba(22,12,6,.93);backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(111,186,94,.18);
+    }
+    .nav-logo{display:flex;align-items:center;gap:.8rem;text-decoration:none;flex-shrink:0;margin-right:2rem;transition:opacity .2s}
+    .nav-logo:hover{opacity:.8}
+    .nav-logo-box{
+      width:56px;height:56px;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .nav-site-name{font-family:'Cinzel',serif;font-weight:700;font-size:.95rem;letter-spacing:.16em;color:var(--stone);white-space:nowrap}
+    .nav-crumb{display:flex;align-items:center;gap:.5rem;font-size:1rem;color:var(--stone)}
+    .nav-crumb a{color:var(--stone);text-decoration:none;transition:color .2s}
+    .nav-crumb a:hover{color:var(--glow)}
+    .nav-crumb-sep{opacity:.4}
+    .nav-crumb-cur{color:var(--parch)}
+
+    /* ═══ LAYOUT ═══ */
+    .layout{display:flex;padding-top:var(--nav-h);min-height:100vh}
+
+    /* ─── SIDEBAR ─── */
+    .sidebar{
+      position:fixed;top:var(--nav-h);bottom:0;left:0;
+      width:var(--sidebar-w);overflow-y:auto;
+      background:rgba(18,12,6,.88);
+      border-right:1px solid rgba(111,186,94,.12);
+      backdrop-filter:blur(8px);z-index:100;
+      padding:1.8rem 0 3rem;
+    }
+    .sidebar::-webkit-scrollbar{width:4px}
+    .sidebar::-webkit-scrollbar-track{background:transparent}
+    .sidebar::-webkit-scrollbar-thumb{background:rgba(111,186,94,.2);border-radius:2px}
+
+    .sidebar-section{margin-bottom:1.4rem}
+    .sidebar-heading{
+      font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;
+      color:var(--leaf);padding:.2rem 1.4rem .55rem;
+      display:flex;align-items:center;gap:.5rem;
+    }
+    .sidebar-heading::after{content:'';flex:1;height:1px;background:rgba(111,186,94,.15)}
+
+    .sidebar-link{
+      display:block;padding:.45rem 1.4rem;
+      font-size:1.05rem;color:var(--stone);
+      text-decoration:none;letter-spacing:.03em;
+      border-left:2px solid transparent;
+      transition:color .15s,background .15s,border-color .15s;cursor:pointer;
+    }
+    .sidebar-link:hover{color:var(--parch);background:rgba(111,186,94,.06)}
+    .sidebar-link.active{color:var(--glow);border-left-color:var(--leaf);background:rgba(111,186,94,.08)}
+
+    .sidebar-sub{
+      display:block;padding:.35rem 1.4rem .35rem 2.2rem;
+      font-size:.95rem;color:rgba(138,128,112,.75);
+      text-decoration:none;letter-spacing:.02em;
+      border-left:2px solid transparent;
+      transition:color .15s,background .15s,border-color .15s;cursor:pointer;
+    }
+    .sidebar-sub:hover{color:var(--parch);background:rgba(111,186,94,.04)}
+    .sidebar-sub.active{color:var(--glow);border-left-color:rgba(111,186,94,.45);background:rgba(111,186,94,.05)}
+
+    /* ─── CONTENT ─── */
+    .content{
+      margin-left:var(--sidebar-w);flex:1;
+      padding:0 3.5rem 8rem;
+      max-width:900px;
+      position:relative;z-index:5;
+    }
+
+    /* ═══ SECTIONS ═══ */
+    .doc-section{padding-top:calc(var(--nav-h) + 3rem);padding-bottom:1rem}
+    .section-divider{height:1px;margin:3rem 0;background:linear-gradient(90deg,rgba(111,186,94,.25),transparent)}
+
+    /* Invisible anchor targets - offset scroll so heading isn't hidden behind nav */
+    .doc-anchor{
+      display:block;
+      visibility:hidden;
+      height:0;
+      /* Offset: nav height + a little breathing room */
+      margin-top:calc(-1 * (var(--nav-h) + 24px));
+      padding-top:calc(var(--nav-h) + 24px);
+    }
+
+    /* ═══ TYPOGRAPHY ═══ */
+    .doc-eyebrow{font-size:.82rem;letter-spacing:.35em;text-transform:uppercase;color:var(--leaf);margin-bottom:.7rem}
+    .doc-title{
+      font-family:'Cinzel',serif;
+      font-weight:900;
+      font-size:clamp(1.5rem,3.5vw,2.4rem);color:var(--cream);
+      text-shadow:0 0 30px rgba(168,217,127,.15),0 2px 8px rgba(0,0,0,.5);
+      margin-bottom:.6rem;line-height:1.2;
+    }
+    .doc-lead{
+      font-size:1.2rem;color:var(--dim);font-style:italic;
+      line-height:1.75;margin-bottom:2.5rem;padding-bottom:2rem;
+      border-bottom:1px solid rgba(111,186,94,.12);
+    }
+    h2.doc-h2{
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size:1.35rem;color:var(--cream);
+      margin:2.8rem 0 .9rem;padding-bottom:.5rem;
+      border-bottom:1px solid rgba(111,186,94,.15);letter-spacing:.04em;
+    }
+    h3.doc-h3{
+      font-size:1rem;color:var(--glow);font-weight:600;
+      margin:1.8rem 0 .6rem;letter-spacing:.05em;text-transform:uppercase;
+    }
+    .doc-p{font-size:1.12rem;line-height:1.82;color:var(--dim);margin-bottom:1.1rem}
+    .doc-p a{color:var(--glow);text-decoration:none;border-bottom:1px solid rgba(168,217,127,.3);transition:color .2s,border-color .2s}
+    .doc-p a:hover{color:var(--cream);border-color:var(--cream)}
+
+    /* ─── Callouts ─── */
+    .callout{border-radius:4px;padding:1rem 1.3rem;margin:1.4rem 0;border-left:3px solid;font-size:1.08rem;line-height:1.72}
+    .callout-info  {background:rgba(111,186,94,.07);border-color:var(--leaf);color:rgba(232,223,200,.8)}
+    .callout-warn  {background:rgba(255,200,60,.07);border-color:#ffc83c;color:rgba(255,220,140,.85)}
+    .callout-danger{background:rgba(255,80,80,.07);border-color:#ff5555;color:rgba(255,180,180,.85)}
+    .callout strong{font-weight:600;margin-right:.4rem}
+
+    /* ─── Numbered list ─── */
+    .rule-list{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin:1rem 0 1.5rem}
+    .rule-list li{display:flex;gap:1rem;align-items:flex-start;font-size:1.1rem;line-height:1.72;color:var(--dim)}
+    .rule-num{
+      flex-shrink:0;width:1.8rem;height:1.8rem;
+      background:rgba(111,186,94,.12);border:1px solid rgba(111,186,94,.25);border-radius:3px;
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Cinzel',serif;font-size:.82rem;font-weight:700;color:var(--glow);margin-top:.18rem;
+    }
+
+    /* ─── Code blocks ─── */
+    .code-block{background:var(--bark3);border:1px solid rgba(111,186,94,.15);border-radius:4px;padding:1.1rem 1.3rem;margin:1rem 0 1.5rem;overflow-x:auto}
+    .code-block pre{font-family:'JetBrains Mono','Courier New',monospace;font-size:.95rem;line-height:1.7;color:#c9dba0;white-space:pre}
+    .code-label{font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(111,186,94,.45);margin-bottom:.5rem}
+    code.inline{font-family:'JetBrains Mono','Courier New',monospace;font-size:.9em;background:rgba(111,186,94,.1);border:1px solid rgba(111,186,94,.2);border-radius:3px;padding:.1em .38em;color:#c9dba0}
+
+    /* ─── Badges ─── */
+    .badge{display:inline-block;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .65rem;border-radius:2px;border:1px solid;font-weight:600;vertical-align:middle;margin-left:.4rem}
+    .badge-new   {color:#a8d97f;border-color:rgba(168,217,127,.3);background:rgba(168,217,127,.07)}
+    .badge-config{color:#ffff55;border-color:rgba(255,255,85,.3);background:rgba(255,255,85,.07)}
+
+    /* ─── Param table ─── */
+    .param-table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:1.02rem}
+    .param-table th{text-align:left;padding:.55rem .9rem;font-size:.78rem;letter-spacing:.25em;text-transform:uppercase;color:var(--leaf);border-bottom:1px solid rgba(111,186,94,.2);font-weight:400}
+    .param-table td{padding:.6rem .9rem;border-bottom:1px solid rgba(111,186,94,.08);color:var(--dim);line-height:1.55;vertical-align:top}
+    .param-table tr:last-child td{border-bottom:none}
+    .param-table td.cmd-cell{display:flex;flex-direction:column;gap:.35rem}
+    .param-table td.cmd-cell code.inline{display:inline-block}
+    .param-type{color:rgba(168,217,127,.6);font-family:'JetBrains Mono',monospace;font-size:.92rem}
+
+    /* ─── Landing card grid ─── */
+    .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin:1.5rem 0}
+    .landing-card{background:rgba(20,14,8,.55);border:1px solid rgba(111,186,94,.14);border-radius:5px;padding:1.3rem 1.4rem;cursor:pointer;text-decoration:none;display:block;transition:border-color .2s,background .2s,transform .18s}
+    .landing-card:hover{border-color:rgba(111,186,94,.35);background:rgba(30,20,10,.65);transform:translateY(-2px)}
+    .landing-card-icon{font-size:1.5rem;margin-bottom:.5rem}
+    .landing-card-title{font-family:'Cinzel',serif;font-weight:700;font-size:.95rem;color:var(--cream);letter-spacing:.05em;margin-bottom:.3rem}
+    .landing-card-desc{font-size:1rem;color:var(--stone);font-style:italic;line-height:1.5}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-box">
+      <img src="sprites/AtePlantArchiveLogo.png" style="width:54px;height:54px;object-fit:contain;image-rendering:pixelated;" alt="AtePlant Logo">
+    </div>
+    <span class="nav-site-name">The AtePlant Archive</span>
+  </a>
+  <div class="nav-crumb">
+    <a href="index.html">Home</a>
+    <span class="nav-crumb-sep">/</span>
+    <span class="nav-crumb-cur">Resources</span>
+  </div>
+</nav>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Overview</div>
+      <a class="sidebar-link" data-anchor="landing">Resources Home</a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Map Making</div>
+      <a class="sidebar-link" data-anchor="mapmaking">Rules &amp; Guidelines</a>
+      <a class="sidebar-sub"  data-anchor="map-submission">Submission Template</a>
+      <a class="sidebar-sub"  data-anchor="mapmaking-submit">Submitting a Completed Map</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-heading">AteScript</div>
+      <a class="sidebar-link" data-anchor="atescript">Introduction</a>
+      <a class="sidebar-sub"  data-anchor="atescript-syntax">Script Structure</a>
+      <a class="sidebar-sub"  data-anchor="atescript-variables">Variables</a>
+      <a class="sidebar-sub"  data-anchor="atescript-commands">Logic &amp; Commands</a>
+      <a class="sidebar-sub"  data-anchor="atescript-events">Triggers</a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Tools</div>
+      <a class="sidebar-link" data-anchor="tools">Tools Overview</a>
+      <a class="sidebar-sub"  data-anchor="tools-block-triggers">Block Triggers</a>
+      <a class="sidebar-sub"  data-anchor="tools-world-settings">World Settings</a>
+    </div>
+
+  </aside>
+
+  <main class="content">
+
+    <!-- ══════ LANDING ══════ -->
+    <span id="landing" class="doc-anchor"></span>
+    <section class="doc-section">
+      <div class="doc-eyebrow">The AtePlant Archive</div>
+      <h1 class="doc-title">Resources</h1>
+      <p class="doc-lead">Everything you need to know when creating adventure maps for the AtePlant Archive.</p>
+      <div class="card-grid">
+
+        <a class="landing-card" data-anchor="mapmaking">
+          <div class="landing-card-icon">📜</div>
+          <div class="landing-card-title">Rules &amp; Guidelines</div>
+          <div class="landing-card-desc">How to submit a map, minimum requirements, and guides to help you make your best map.</div>
+        </a>
+        <a class="landing-card" data-anchor="atescript">
+          <div class="landing-card-icon">⚙️</div>
+          <div class="landing-card-title">AteScript</div>
+          <div class="landing-card-desc">The AtePlant Archive's custom scripting language. A subsitute for DataPack logic.</div>
+        </a>
+        <a class="landing-card" data-anchor="tools">
+          <div class="landing-card-icon">🛠️</div>
+          <div class="landing-card-title">Tools</div>
+          <div class="landing-card-desc">Custom plugin you can use in your adventure maps as well as recommended tools.</div>
+        </a>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+
+
+    <!-- ══════ MAP MAKING ══════ -->
+    <span id="mapmaking" class="doc-anchor"></span>
+    <section class="doc-section">
+      <div class="doc-eyebrow">Rules &amp; Guidelines</div>
+      <h1 class="doc-title">Map Making Guidelines</h1>
+      <p class="doc-lead">Everything you need to know to create and submit a map for the AtePlant Archive.</p>
+
+      <!-- Priority 1 -->
+      <h2 class="doc-h2">Priority 1: Gameplay</h2>
+      <p class="doc-p">The number one priority is that the gameplay is <strong>high-effort</strong>, <strong>fun</strong>, and <strong>creative</strong>. Your map will not be accepted if it does not meet all three of these criteria. These will be judged loosely, especially the fun part.</p>
+      <p class="doc-p">If your map requires a plugin, datapack, resource pack, or command blocks that are necessary to how the map is played or enjoyed, you must let me know <strong>before you start building</strong> so I can approve it. If you want me to make a plugin, datapack, or resource pack for your map, just tell me.</p>
+      <div class="callout callout-info"><strong>Note:</strong> Maps can be about anything: parkour, puzzles, ice boat racing, etc.</div>
+
+      <!-- Priority 2 -->
+      <h2 class="doc-h2">Priority 2: Build Quality</h2>
+      <p class="doc-p">The build should be good. This does not mean your map requires a build to be accepted - floating parkour with some pixel art in the sky is totally fine. However, <strong>anything that is built should be high quality</strong>.</p>
+      <p class="doc-p">Do not use any existing map on this server as a frame-of-reference for quality.</p>
+
+      <!-- Submission Template -->
+      <span id="map-submission" class="doc-anchor"></span>
+      <h2 class="doc-h2">Submission Template</h2>
+
+      <h3 class="doc-h3">Is the map complete?</h3>
+      <p class="doc-p">There are no plot worlds on this server, so all building should be done elsewhere.</p>
+
+      <p class="doc-p">If your map requires server-side support to create the gameplay (custom plugins, AteScripts, resource packs, command blocks, etc.), provide the following. <strong>Make this post in #support - do not send it here.</strong></p>
+
+      <div class="callout callout-info">If the map looks high quality or the creators have enough street cred, it will be given its own world on the server to be built. If the map is not complete within two months of acceptance, the world will be saved, sent to the creators, and then deleted. Extensions are allowed.</div>
+
+      <!-- Complete map form -->
+      <span id="mapmaking-submit" class="doc-anchor"></span>
+      <h2 class="doc-h2">Submitting a Completed Map</h2>
+      <p class="doc-p">Use the following fields when submitting a finished map.</p>
+
+      <table class="param-table">
+        <thead><tr><th>Field</th><th>Details</th></tr></thead>
+        <tbody>
+          <tr><td><span class="param-name">Name</span></td><td>No spaces or special characters.</td></tr>
+          <tr><td><span class="param-name">Creators</span></td><td>List all creators. All creators must have joined the server at least once.</td></tr>
+          <tr><td><span class="param-name">Description</span></td><td>Brief description for the map. This will be shown in the map menu</td></tr>
+          <tr><td><span class="param-name">Tags</span></td><td>Subject to change to match existing tags. Max 5.</td></tr>
+          <tr><td><span class="param-name">Flair</span></td><td>How the map appears in the menu and when you start it. Can be completely different to the name. Spaces, special characters, and colors are allowed, same formatting as colored signs.</td></tr>
+          <tr><td><span class="param-name">Lobby</span></td><td>Does it have a lobby? A lobby is the area you are teleported to before the map, with a start plate that begins the map when stepped on. If No, the map starts immediately when you teleport in.</td></tr>
+          
+          <tr><td><span class="param-name">Additional Notes</span></td><td>Clarify the following (If left blank, it will be default to no):
+          <ul style="margin-top:.5rem;padding-left:1.2rem;display:flex;flex-direction:column;gap:.35rem">
+            <li>Does your map have multiple endings? If yes, your video must show you beating all endings.</li>
+            <li>Is the map singleplayer? If yes, can party members join? This is usually for co-op maps.</li>
+            <li>Is your map in hardcore mode? If yes, how many lives? Using a checkpoint in hardcore costs one life. If you run out of lives, you cannot play the map again for the rest of the day.</li>
+            <li>Is godmode enabled (can the player get hurt)?</li>
+            <li>Is practice enabled?</li>
+            <li>Does it use AteScripts? If yes, provide it here or make a separate post in #support with the script file included.</li>
+          </ul>
+          </td></tr>
+          <tr><td><span class="param-name">Video</span></td><td>Provide a video or clips of you beating the map, spliced checkpoint by checkpoint. If you do not want it public, Provide the video in #support.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout-warn"><strong>Important:</strong> If the map is not yet on the server, please post the schematic or world file with coordinates of the build in #support. Mark where you teleport in (if you have a lobby), starting plate, end plates, and any triggers such as teleporters, launch pads, effect blocks with signs, etc. - these will be removed.</div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ══════ ATESCRIPT ══════ -->
+    <span id="atescript" class="doc-anchor"></span>
+    <section class="doc-section">
+      <div class="doc-eyebrow">Scripting Reference</div>
+      <h1 class="doc-title">AteScript</h1>
+      <p class="doc-lead">AteScript is the server's custom Minecraft scripting language parsed and executed by a server plugin.
+        The AtePlant Archive uses Mutiverse-Core where each map gets their own world; However, DataPacks work on a per-dimension basis.
+        In order to alleviate this issue, AteScript was created to replicate the behaviour of DataPacks while also having the events you find in Spigot API.
+        The compiler for AteScript is public, so you are able to test your scripts on a local server.
+      </p>
+      <div class="callout callout-info"><strong>Note:</strong> AteScript is currently in active development. APIs may change between server updates.</div>
+
+      <!-- Structure -->
+      <span id="atescript-syntax" class="doc-anchor"></span>
+      <h2 class="doc-h2">Script Structure</h2>
+      <p class="doc-p">Every script file is named after its purpose and ends in <code class="inline">.atescript</code>. Each script declares a trigger, a world, and then its logic. The following header fields are required at the top of every script:</p>
+      <table class="param-table">
+        <thead><tr><th>Field</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><span class="param-name">$trigger</span></td><td>How the script is triggered. See Triggers below.</td></tr>
+          <tr><td><span class="param-name">$world</span></td><td>The trigger must occur in this world. AKA the adventure map it is for.</td></tr>
+        </tbody>
+      </table>
+
+      <!-- Variables -->
+      <span id="atescript-variables" class="doc-anchor"></span>
+      <h2 class="doc-h2">Variables</h2>
+      <p class="doc-p"><code class="inline">$player</code> is automatically set to the player who triggered the script. Additional variables are available depending on the trigger used. This is clarified in the Triggers section below.</p>
+      <table class="param-table">
+        <thead><tr><th>Variable</th><th>Availability</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><span class="param-name">$player</span></td><td>All triggers</td><td>The player who triggered the script.</td></tr>
+          <tr><td><span class="param-name">$btype</span></td><td>Block triggers</td><td>The block's material type. Comparing something to this follows the Spigot API https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html material naming convention: ACACIA_FENCE_GATE</td></tr>
+          <tr><td><span class="param-name">$blocation</span></td><td>Block triggers</td><td>The block's location. Comparing something to this follows the following naming convention: x,y,z</td></tr>
+          <tr><td><span class="param-name">$itype</span></td><td>Item triggers</td><td>The material of the item being held or interacted with. Comparing something to this follows the Spigot API https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html material naming convention: IRON_INGOT</td></tr>
+        </tbody>
+      </table>
+
+      <!-- Logic & Commands -->
+      <span id="atescript-commands" class="doc-anchor"></span>
+      <h2 class="doc-h2">Logic &amp; Commands</h2>
+
+      <h3 class="doc-h3">Logic Statements</h3>
+      <p class="doc-p">Use <code class="inline">endif</code> to conditionally end the script.</p>
+      <ul class="rule-list" style="margin-bottom:1.5rem">
+        <li><span class="rule-num">1</span><span>Syntax: <code class="inline">endif &lt;variable&gt; &lt;operator&gt; &lt;value&gt;</code></span></li>
+        <li><span class="rule-num">2</span><span>Use <code class="inline">is</code> / <code class="inline">isnot</code> to check if a value is or isn't equal to something.</span></li>
+      </ul>
+      <div class="code-block">
+        <div class="code-label">Example</div>
+        <pre>endif $btype isnot CHISELED_RESIN_BRICKS
+/give $player cyan_wool 1</pre>
+      </div>
+
+      <h3 class="doc-h3">Console Commands</h3>
+      <p class="doc-p">Run any command directly on the console by prefixing it with <code class="inline">/</code>. Variables like <code class="inline">$player</code> are substituted inline.
+      Also clarify the origin of the command: Use /minecraft:give ... if you are using a base-Minecraft give command, Use /Essentials:give if you are using the EssentialsX give command.</p>
+      <div class="code-block">
+        <div class="code-label">Example</div>
+        <pre>/minecraft:gamemode creative $player</pre>
+      </div>
+
+      <h3 class="doc-h3">Data Storage</h3>
+      <p class="doc-p">Persist data to a player using the <code class="inline">*</code> prefix. Data is stored in persistent data containers and survives across sessions.</p>
+      <table class="param-table">
+        <thead><tr><th>Command</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><span class="param-name">*store &lt;field&gt; &lt;value&gt;</span></td><td>Store a value under the given field name on the player.</td></tr>
+          <tr><td><span class="param-name">*get &lt;field&gt;</span></td><td>Retrieve a stored value by field name.</td></tr>
+          <tr><td><span class="param-name">*delete &lt;field&gt;</span></td><td>Delete a stored field from the player.</td></tr>
+        </tbody>
+      </table>
+
+      <!-- Triggers -->
+      <span id="atescript-events" class="doc-anchor"></span>
+      <h2 class="doc-h2">Triggers</h2>
+      <p class="doc-p">Triggers define what event causes the script to run. Set the trigger at the top of the script with <code class="inline">$trigger &lt;name&gt;</code>.</p>
+      <table class="param-table">
+        <thead><tr><th>Trigger</th><th>When It Fires</th><th>Extra Variables</th></tr></thead>
+        <tbody>
+          <tr><td><span class="param-name">onBlockInteract</span></td><td>Player left-clicks on a block.</td><td><span class="param-type">$btype, $blocation</span></td></tr>
+          <tr><td><span class="param-name">onBlockBreak</span></td><td>Player breaks a block.</td><td><span class="param-type">$btype, $blocation</span></td></tr>
+          <tr><td><span class="param-name">onItemInteract</span></td><td>Player left-clicks while holding an item.</td><td><span class="param-type">$itype</span></td></tr>
+          <tr><td><span class="param-name">onItemPunch</span></td><td>Player punches while holding an item.</td><td><span class="param-type">$itype</span></td></tr>
+          <tr><td><span class="param-name">onPlateActivate</span></td><td>Player steps on a pressure plate.</td><td><span class="param-type">$btype, $blocation</span></td></tr>
+          <tr><td><span class="param-name">onTeleport</span></td><td>Player teleports.</td><td>None</td></tr>
+        </tbody>
+      </table>
+
+      <!-- Examples -->
+      <h2 class="doc-h2">Examples</h2>
+
+      <div class="code-block">
+        <div class="code-label">drb_CyanWool.atescript - Give cyan wool on breaking a specific block</div>
+        <pre>$trigger onBlockBreak
+$world DarkerBramble
+endif $btype isnot CHISELED_RESIN_BRICKS
+/give $player cyan_wool[can_place_on=[{blocks:cyan_glazed_terracotta}]] 1</pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-label">drb_TeleportRemoval.atescript - Clear items on teleport</div>
+        <pre>$trigger onTeleport
+$world DarkerBramble
+/clear $player minecraft:purple_wool
+/clear $player minecraft:cyan_wool</pre>
+      </div>
+
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ══════ TOOLS ══════ -->
+    <span id="tools" class="doc-anchor"></span>
+    <section class="doc-section">
+      <div class="doc-eyebrow">Tools</div>
+      <h1 class="doc-title">Tools</h1>
+      <p class="doc-lead">All server-specific tools to help with mechanics and helpful mods to make map-making easier. Commands listed are ones you can use in AteScripts.
+        If your map requires a plugin with a different mechanic/function then:</p>
+      <ul class="rule-list" style="margin-bottom:2rem">
+        <li><span class="rule-num">1</span>If it is simple, try to make it using an AteScript.</li>
+        <li><span class="rule-num">2</span>If it is complex, let AtePlant know through dms or #support to see if that idea is possible, and it will be made for you if so.</li>
+      </ul>
+
+      <span id="tools-block-triggers" class="doc-anchor"></span>
+      <h2 class="doc-h2">Block Triggers</h2>
+      <table class="param-table">
+        <thead><tr><th>Tool</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><span class="param-name">Teleporters</span></td><td>Teleport a player once they step on a block. 
+            - Exact Coords: specify the exact coordinates you will teleport to. Default will teleport you to the relative coords from where you stepped on the first teleporters.
+            - Facing: specify the yaw and pitch you will face after teleporting. Default will keep your current facing.
+            - Two-Way Teleporters: it's in the name.
+            - Locked Teleporters: in order to use this teleporter, you must have specific items in your inventory.</td></tr>
+          <tr><td><span class="param-name">Launchers</span></td><td>General server and client performance optimisations.</td></tr>
+          <tr><td><span class="param-name">Potion Effects</span></td><td>Performance tweaks and shader support for 1.8.9.</td></tr>
+        </tbody>
+      </table>
+      <span id="tools-world-settings" class="doc-anchor"></span>
+      <h2 class="doc-h2">World Settings</h2>
+      <table class="param-table">
+        <thead><tr><th>Tool</th><th>Description</th><th>Commands</th></tr></thead>
+        <tbody>
+          <tr><td><span class="param-name">Breakable Blocks</span></td><td>Major rendering performance improvements.</td><td class="cmd-cell"><code class="inline">None</code></td></tr>
+          <tr><td><span class="param-name">Item Box</span></td><td>General server and client performance optimisations.</td><td class="cmd-cell"><code class="inline">None</code></td></tr>
+          <tr><td><span class="param-name">Only Sprint</span></td><td>Performance tweaks and shader support for 1.8.9.</td><td class="cmd-cell"><code class="inline">None</code></td></tr>
+          <tr><td><span class="param-name">Timer Block</span></td><td>Performance tweaks and shader support for 1.8.9.</td><td class="cmd-cell"><code class="inline">None</code></td></tr>
+          <tr><td><span class="param-name">Trapdoor Clutch</span></td><td>Performance tweaks and shader support for 1.8.9.</td><td class="cmd-cell"><code class="inline">None</code></td></tr>
+          <tr><td><span class="param-name">Sudoku</span></td><td>Performance tweaks and shader support for 1.8.9.</td><td class="cmd-cell"><code class="inline">/startsudoku [id] [player], /endsudoku [player]</code></td></tr>
+          <tr><td><span class="param-name">Practice</span></td><td>Performance tweaks and shader support for 1.8.9.</td><td class="cmd-cell"><code class="inline">/forcepractice [player], /forceunpractice [player]</code></td></tr>
+
+        </tbody>
+      </table>
+    </section>
+  </main>
+</div>
+
+<script>
+// ── Smooth scroll to anchor ───────────────────────
+function jumpTo(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  // span.doc-anchor uses padding-top trick for offset, so just scroll to it
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Wire all data-anchor elements
+document.querySelectorAll('[data-anchor]').forEach(el => {
+  el.addEventListener('click', e => {
+    e.preventDefault();
+    jumpTo(el.dataset.anchor);
+  });
+});
+
+// ── Scroll-spy ────────────────────────────────────
+const anchors = Array.from(document.querySelectorAll('.doc-anchor'));
+const sidebarLinks = document.querySelectorAll('[data-anchor]');
+
+function setActive(id) {
+  sidebarLinks.forEach(l => l.classList.toggle('active', l.dataset.anchor === id));
+}
+
+// Use IntersectionObserver to track which anchor just crossed the top
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      setActive(entry.target.id);
+    }
+  });
+}, {
+  rootMargin: '-10% 0px -85% 0px',
+  threshold: 0
+});
+
+anchors.forEach(a => observer.observe(a));
+
+// Default highlight on load
+setActive('landing');
+</script>
+</body>
+</html>

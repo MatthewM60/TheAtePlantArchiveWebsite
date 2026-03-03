@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The AtePlant Archive</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--moss:#3d6b3a;--bark:#2a1f14;--bark2:#1e1508;--leaf:#6fba5e;--stone:#8a8070;--parch:#e8dfc8;--cream:#f5f0e4;--glow:#a8d97f;--dim:rgba(232,223,200,0.65);}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bark);color:var(--parch);font-family:'Crimson Pro',Georgia,serif;font-weight:300;overflow-x:hidden;min-height:100vh;}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 80% 55% at 15% 8%,rgba(61,107,58,.16) 0%,transparent 60%),radial-gradient(ellipse 55% 75% at 85% 92%,rgba(61,107,58,.1) 0%,transparent 60%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%232a1f14'/%3E%3Crect x='0' y='0' width='1' height='1' fill='%2322180f' opacity='.6'/%3E%3Crect x='2' y='2' width='1' height='1' fill='%23301f10' opacity='.4'/%3E%3C/svg%3E");}
+
+    nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;padding:0 2rem;height:80px;background:rgba(26,15,8,.9);backdrop-filter:blur(10px);border-bottom:1px solid rgba(111,186,94,.18);}
+    .nav-logo{display:flex;align-items:center;gap:.8rem;text-decoration:none;flex-shrink:0;margin-right:2rem;transition:opacity .2s;}
+    .nav-logo:hover{opacity:.8}
+    .nav-logo-box{width:68px;height:68px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .nav-site-name{font-family:'Cinzel',serif;font-size:.95rem;font-weight:700;letter-spacing:.16em;color:var(--stone);white-space:nowrap;}
+    .nav-tabs{display:flex;align-items:center;gap:.2rem}
+    .nav-tab{text-decoration:none;font-family:'Crimson Pro',serif;font-size:1.1rem;letter-spacing:.1em;color:var(--stone);padding:.5rem 1.2rem;border-radius:3px;transition:color .2s,background .2s;white-space:nowrap;}
+    .nav-tab:hover{color:var(--parch);background:rgba(111,186,94,.08)}
+    .nav-tab.active{color:var(--glow);background:rgba(111,186,94,.12)}
+
+    .section-wrap{max-width:880px;margin:0 auto;padding:3.5rem 2rem 6rem;position:relative;z-index:5;}
+    .card{background:rgba(20,14,8,.6);border:1px solid rgba(111,186,94,.14);border-radius:4px;padding:2.2rem 2.6rem;margin-bottom:1.5rem;backdrop-filter:blur(5px);}
+    .card-label{font-size:.85rem;letter-spacing:.3em;text-transform:uppercase;color:var(--leaf);margin-bottom:.85rem;display:flex;align-items:center;gap:.6rem;}
+    .card-label::after{content:'';flex:1;height:1px;background:rgba(111,186,94,.18)}
+    .card p{font-size:1.15rem;line-height:1.8;color:var(--dim);font-style:italic}
+
+    .home-hero{position:sticky;top:80px;z-index:1;width:100%;}
+    .hero-banner{width:100%;display:block;image-rendering:pixelated;}
+    .hero-separator{width:100%;height:3px;background:linear-gradient(90deg,transparent 0%,rgba(111,186,94,.25) 8%,rgba(168,217,127,.7) 30%,var(--leaf) 50%,rgba(168,217,127,.7) 70%,rgba(111,186,94,.25) 92%,transparent 100%);box-shadow:0 0 18px rgba(111,186,94,.35),0 2px 8px rgba(0,0,0,.5);}
+    .home-content{position:relative;z-index:10;background:var(--bark);border-radius:12px 12px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,.7);margin-top:-4px;}
+
+    .bare{padding:0 0 1.6rem}
+    .ip-row{display:flex;align-items:center;gap:.85rem;flex-wrap:wrap}
+    .ip-display{font-family:'Courier New',monospace;font-size:1.55rem;color:var(--glow);letter-spacing:.06em}
+    .btn-copy{background:transparent;border:1px solid var(--leaf);color:var(--leaf);font-family:'Crimson Pro',serif;font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;padding:.5rem 1.3rem;cursor:pointer;border-radius:2px;transition:background .2s,color .2s,box-shadow .2s;}
+    .btn-copy:hover{background:var(--leaf);color:var(--bark);box-shadow:0 0 18px rgba(111,186,94,.35)}
+    .btn-copy.copied{background:var(--moss);color:var(--cream);border-color:var(--moss)}
+    .status-chip{display:inline-flex;align-items:center;gap:.38rem;background:rgba(20,14,8,.65);border:1px solid rgba(111,186,94,.2);border-radius:3px;padding:.3rem .8rem;backdrop-filter:blur(4px);}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--leaf);box-shadow:0 0 6px var(--leaf);flex-shrink:0;animation:pulse 2s infinite}
+    .chip-n{font-family:'Cinzel',serif;font-weight:700;font-size:1.05rem;color:var(--glow);line-height:1}
+    .chip-l{font-size:.9rem;color:var(--stone);font-style:italic}
+    .discord-card{display:inline-flex;background:rgba(20,14,8,.6);border:1px solid rgba(111,186,94,.14);border-radius:4px;padding:.9rem 1.4rem;backdrop-filter:blur(5px);}
+    .discord-link{display:inline-flex;align-items:center;gap:.6rem;color:var(--parch);text-decoration:none;font-size:1.05rem;letter-spacing:.04em;transition:color .2s}
+    .discord-link:hover{color:var(--glow)}
+    .discord-icon{width:22px;height:22px;fill:currentColor;flex-shrink:0}
+    footer{position:relative;z-index:5;text-align:center;padding:1.8rem;border-top:1px solid rgba(111,186,94,.1);font-size:.95rem;color:rgba(138,128,112,.45);letter-spacing:.12em;}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.82)}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html" title="Home">
+    <div class="nav-logo-box">
+      <img src="sprites/AtePlantArchiveLogo.png" style="width:66px;height:66px;object-fit:contain;image-rendering:auto;" alt="AtePlant Logo">
+    </div>
+    <span class="nav-site-name">The AtePlant Archive</span>
+  </a>
+  <div class="nav-tabs">
+    <a class="nav-tab active" href="index.html">Home</a>
+    <a class="nav-tab" href="maps.html">Adventure Maps</a>
+    <a class="nav-tab" href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<div class="home-hero">
+  <img class="hero-banner" src="sprites/banner2.png" alt="The AtePlant Archive">
+  <div class="hero-separator"></div>
+</div>
+
+<div class="home-content">
+  <div class="section-wrap" style="padding-top:2.5rem">
+    <div class="bare">
+      <div class="ip-row">
+        <span class="ip-display" id="serverIP">ateplant.online</span>
+        <button class="btn-copy" id="copyBtn" onclick="copyIP()">Copy IP</button>
+        <div class="status-chip">
+          <span class="dot"></span>
+          <span class="chip-n" id="playerCount">—</span>
+          <span class="chip-l">online</span>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">About Us</div>
+      <p>&nbsp;A Minecraft Server to house all of AtePlant's adventure maps (+ some others).
+        This server pushes map-making to its limits by providing custom tools to allow
+        creators to make the most creative maps they can dream up.
+        Whether it be difficult parkour, fast-paced ice boat racing, intricate mazes,
+        or convoluted puzzles, The AtePlant Archive strives to provide unique and fun experiences.</p>
+    </div>
+    <div style="display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;">
+      <div class="discord-card">
+        <a class="discord-link" href="https://discord.gg/gXThEAJ5C9" target="_blank" rel="noopener">
+          <svg class="discord-icon" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.003.02.014.04.027.054a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+          Join our Discord
+        </a>
+      </div>
+      <div class="discord-card">
+        <a class="discord-link" href="https://ko-fi.com/ateplant" target="_blank" rel="noopener" style="color:#ff5e5b;">
+          <svg class="discord-icon" viewBox="0 0 24 24" style="fill:#ff5e5b;"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.108.033l.84.779.824-.792c1.102-1.12 3.157-1.043 4.108-.033.952 1.01.707 2.732-.326 3.768z"/></svg>
+          Support on Ko-fi
+        </a>
+      </div>
+    </div>
+  </div>
+  <footer>&copy; 2025 The AtePlant Archive &nbsp;·&nbsp; All Plants Reserved</footer>
+</div>
+
+<script>
+async function fetchPlayers() {
+  try {
+    const r = await fetch('https://api.mcsrvstat.us/3/play.ateplantarchive.net');
+    const d = await r.json();
+    document.getElementById('playerCount').textContent = d?.players?.online ?? 0;
+  } catch { document.getElementById('playerCount').textContent = '?'; }
+}
+function copyIP() {
+  navigator.clipboard.writeText(document.getElementById('serverIP').textContent).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✓ Copied!'; btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy IP'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+fetchPlayers();
+setInterval(fetchPlayers, 60000);
+</script>
+</body>
+</html>
