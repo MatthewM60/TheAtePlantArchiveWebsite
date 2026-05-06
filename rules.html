@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact — The AtePlant Archive</title>
+  <title>Rules — The AtePlant Archive</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet"/>
   <style>
     :root{--moss:#3d6b3a;--bark:#2a1f14;--bark2:#1e1508;--leaf:#6fba5e;--stone:#8a8070;--parch:#e8dfc8;--cream:#f5f0e4;--glow:#a8d97f;--dim:rgba(232,223,200,0.65);}
@@ -21,19 +21,32 @@
     .nav-tab:hover{color:var(--parch);background:rgba(111,186,94,.08)}
     .nav-tab.active{color:var(--glow);background:rgba(111,186,94,.12)}
 
-    .section-wrap{max-width:880px;margin:0 auto;padding:3.5rem 2rem 6rem;position:relative;z-index:5;}
+    .section-wrap{max-width:820px;margin:0 auto;padding:3.5rem 2rem 6rem;position:relative;z-index:5;}
     .page-title{font-family:'Cinzel',serif;font-weight:900;font-size:clamp(1.6rem,4vw,2.8rem);color:var(--cream);text-shadow:0 0 30px rgba(168,217,127,.18),0 2px 8px rgba(0,0,0,.5);margin-bottom:.5rem;}
     .page-subtitle{font-size:1.15rem;color:var(--stone);font-style:italic;margin-bottom:2.5rem;letter-spacing:.05em}
     .divider{width:90px;height:1px;margin:0 0 2.5rem;background:linear-gradient(90deg,var(--leaf),transparent)}
-    .card{background:rgba(20,14,8,.6);border:1px solid rgba(111,186,94,.14);border-radius:4px;padding:2.2rem 2.6rem;margin-bottom:1.5rem;backdrop-filter:blur(5px);}
-    .card-label{font-size:.85rem;letter-spacing:.3em;text-transform:uppercase;color:var(--leaf);margin-bottom:.85rem;display:flex;align-items:center;gap:.6rem;}
-    .card-label::after{content:'';flex:1;height:1px;background:rgba(111,186,94,.18)}
-    .contact-email{font-family:'Courier New',monospace;font-size:1.4rem;color:var(--glow);letter-spacing:.06em;text-decoration:none;border-bottom:1px solid rgba(168,217,127,.3);transition:color .2s,border-color .2s;display:inline-block;padding-bottom:2px;}
-    .contact-email:hover{color:var(--cream);border-color:var(--cream)}
-    .discord-card{display:inline-flex;background:rgba(20,14,8,.6);border:1px solid rgba(111,186,94,.14);border-radius:4px;padding:.9rem 1.4rem;backdrop-filter:blur(5px);}
-    .discord-link{display:inline-flex;align-items:center;gap:.6rem;color:var(--parch);text-decoration:none;font-size:1.05rem;letter-spacing:.04em;transition:color .2s}
-    .discord-link:hover{color:var(--glow)}
-    .discord-icon{width:22px;height:22px;fill:currentColor;flex-shrink:0}
+
+    .rules-section{margin-bottom:2.6rem;}
+    .rules-section-title{font-family:'Cinzel',serif;font-weight:700;font-size:1.15rem;color:var(--cream);letter-spacing:.08em;margin-bottom:1.1rem;display:flex;align-items:center;gap:.7rem;}
+    .rules-section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(111,186,94,.3),transparent)}
+
+    .rule-list{display:flex;flex-direction:column;gap:.7rem;}
+    .rule{display:flex;gap:1.1rem;align-items:flex-start;background:rgba(20,14,8,.5);border:1px solid rgba(111,186,94,.11);border-radius:4px;padding:1.1rem 1.4rem;transition:border-color .18s;}
+    .rule:hover{border-color:rgba(111,186,94,.28)}
+    .rule-num{font-family:'Cinzel',serif;font-weight:700;font-size:1rem;color:var(--leaf);flex-shrink:0;min-width:1.6rem;padding-top:.05em;}
+    .rule-body{}
+    .rule-title{font-size:1.05rem;font-weight:600;color:var(--cream);letter-spacing:.03em;margin-bottom:.25rem;}
+    .rule-desc{font-size:1rem;color:var(--dim);line-height:1.7;font-style:italic;}
+
+    .severity{display:inline-flex;align-items:center;gap:.3rem;font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;padding:.15rem .55rem;border-radius:2px;border:1px solid;font-weight:600;margin-left:.5rem;vertical-align:middle;}
+    .sev-low{color:#55ff55;border-color:rgba(85,255,85,.3);background:rgba(85,255,85,.07)}
+    .sev-med{color:#ffff55;border-color:rgba(255,255,85,.3);background:rgba(255,255,85,.07)}
+    .sev-high{color:#ff5555;border-color:rgba(255,85,85,.3);background:rgba(255,85,85,.07)}
+    .sev-ban{color:#ff55ff;border-color:rgba(200,50,220,.35);background:rgba(80,0,100,.2)}
+
+    .intro-card{background:rgba(20,14,8,.6);border:1px solid rgba(111,186,94,.14);border-radius:4px;padding:1.8rem 2.2rem;margin-bottom:2.4rem;backdrop-filter:blur(5px);}
+    .intro-card p{font-size:1.1rem;line-height:1.85;color:var(--dim);}
+
     footer{position:relative;z-index:5;text-align:center;padding:1.8rem;border-top:1px solid rgba(111,186,94,.1);font-size:.95rem;color:rgba(138,128,112,.45);letter-spacing:.12em;}
     @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
     .content-body{animation:fadeUp .4s ease both}
@@ -70,8 +83,8 @@
   <div class="nav-tabs">
     <a class="nav-tab" href="index.html">Home</a>
     <a class="nav-tab" href="maps.html">Adventure Maps</a>
-    <a class="nav-tab" href="rules.html">Rules</a>
-    <a class="nav-tab active" href="contact.html">Contact</a>
+    <a class="nav-tab active" href="rules.html">Rules</a>
+    <a class="nav-tab" href="contact.html">Contact</a>
   </div>
 
   <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
@@ -81,25 +94,91 @@
 <div class="nav-drawer" id="navDrawer">
 <a class="nav-tab" href="index.html">Home</a>
     <a class="nav-tab" href="maps.html">Adventure Maps</a>
-    <a class="nav-tab" href="rules.html">Rules</a>
-    <a class="nav-tab active" href="contact.html">Contact</a>
+    <a class="nav-tab active" href="rules.html">Rules</a>
+    <a class="nav-tab" href="contact.html">Contact</a>
 </div>
 
 <div class="content-body">
 <div class="section-wrap">
-  <div class="page-title">Contact Us</div>
-  <div class="page-subtitle">Questions, reports, or business inquiries?</div>
+  <div class="page-title">Server Rules</div>
+  <div class="page-subtitle">Play fair, or else.</div>
   <div class="divider"></div>
-  <div class="card">
-    <div class="card-label">Email</div>
-    <a class="contact-email" href="mailto:contact@ateplant.online">contact@ateplant.online</a>
+
+  <div class="intro-card">
+    <p>These rules apply to all players on the server and in our Discord. Breaking them will result in a permanent ban or permanent mute.</p>
   </div>
-  <div class="discord-card" style="margin-top:.5rem">
-    <a class="discord-link" href="https://discord.gg/QrCm2wmZ" target="_blank" rel="noopener">
-      <svg class="discord-icon" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.003.02.014.04.027.054a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-      Join our Discord
-    </a>
+
+  <!-- Rules -->
+  <div class="rules-section">
+    <div class="rules-section-title">Rules</div>
+    <div class="rule-list">
+      <div class="rule">
+        <span class="rule-num">1</span>
+        <div class="rule-body">
+          <div class="rule-title">No Cheating</div>
+          <div class="rule-desc">Hacked clients, macros, and any mod that gives an unfair advantage are not allowed. Mods like OptiFine and performance mods are fine.</div>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rule-num">2</span>
+        <div class="rule-body">
+          <div class="rule-title">No Hate Speech</div>
+          <div class="rule-desc">Slurs, harassment, and targeted toxicity ain't allowed.</div>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rule-num">3</span>
+        <div class="rule-body">
+          <div class="rule-title">Do Not Grief Others</div>
+          <div class="rule-desc">Don't intentionally ruin someone else's run, destroy builds/maps purposefully, or interfere with other's gameplay negatively.</div>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rule-num">4</span>
+        <div class="rule-body">
+          <div class="rule-title">Do Not Abuse Exploits</div>
+          <div class="rule-desc">If you find a bug, report it. Using server exploits to produce invalid records or gain unfair advantages will get you banned.</div>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rule-num">5</span>
+        <div class="rule-body">
+          <div class="rule-title">Do Not Abuse Map Skips</div>
+          <div class="rule-desc">Major sequence breaks and out-of-bounds skips must be submitted on the Discord. Runs that use them will be scrubbed, and exploiting them without reporting it will result in a ban.</div>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rule-num">6</span>
+        <div class="rule-body">
+          <div class="rule-title">No Spam</div>
+          <div class="rule-desc">Keep chat readable. Spamming the same message or flooding chat will get you a mute.</div>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rule-num">7</span>
+        <div class="rule-body">
+          <div class="rule-title">Keep It Appropriate</div>
+          <div class="rule-desc">Explicit or sexual content in chat, usernames, or skins is not allowed.</div>
+        </div>
+      </div>
+      <div class="rule">
+        <span class="rule-num">8</span>
+        <div class="rule-body">
+          <div class="rule-title">Don't Impersonate Staff</div>
+          <div class="rule-desc">Pretending to be a staff member or speaking with false authority will get you banned.</div>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <!-- Appeals -->
+  <div class="rules-section">
+    <div class="rules-section-title">Appeals</div>
+    <div class="intro-card" style="margin-bottom:0">
+      <p>Bans are permanent. If you think yours was a mistake, you can appeal in our <a href="https://discord.gg/gXThEAJ5C9" target="_blank" rel="noopener" style="color:var(--glow);text-decoration:none;border-bottom:1px solid rgba(168,217,127,.3);">Discord server</a>. There are no guarantees.</p>
+    </div>
+  </div>
+
 </div>
 </div>
 

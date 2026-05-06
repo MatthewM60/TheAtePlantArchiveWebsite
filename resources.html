@@ -37,26 +37,28 @@
     /* ═══ NAVBAR ═══ */
     nav{
       position:fixed;top:0;left:0;right:0;z-index:200;
-      display:flex;align-items:center;
-      padding:0 2rem;height:var(--nav-h);
+      display:flex;align-items:center;flex-wrap:nowrap;overflow:hidden;
+      padding:0 clamp(.5rem,2vw,2rem);height:var(--nav-h);
       background:rgba(22,12,6,.93);backdrop-filter:blur(12px);
       border-bottom:1px solid rgba(111,186,94,.18);
     }
-    .nav-logo{display:flex;align-items:center;gap:.8rem;text-decoration:none;flex-shrink:0;margin-right:2rem;transition:opacity .2s}
+    .nav-logo{display:flex;align-items:center;gap:.8rem;text-decoration:none;flex-shrink:0;margin-right:clamp(.5rem,1.5vw,2rem);transition:opacity .2s}
     .nav-logo:hover{opacity:.8}
     .nav-logo-box{
       width:56px;height:56px;
-      display:flex;align-items:center;justify-content:center;
+      display:flex;align-items:center;justify-content:center;flex-shrink:0;
     }
-    .nav-site-name{font-family:'Cinzel',serif;font-weight:700;font-size:.95rem;letter-spacing:.16em;color:var(--stone);white-space:nowrap}
-    .nav-crumb{display:flex;align-items:center;gap:.5rem;font-size:1rem;color:var(--stone)}
+    .nav-site-name{font-family:'Cinzel',serif;font-weight:700;font-size:.95rem;letter-spacing:.16em;color:var(--stone);white-space:nowrap;flex-shrink:0;}
+    .nav-crumb{display:flex;align-items:center;gap:.5rem;font-size:1rem;color:var(--stone);flex-shrink:1;min-width:0;overflow:hidden;}
+      nav{padding:0 .75rem}
+    }
     .nav-crumb a{color:var(--stone);text-decoration:none;transition:color .2s}
     .nav-crumb a:hover{color:var(--glow)}
     .nav-crumb-sep{opacity:.4}
     .nav-crumb-cur{color:var(--parch)}
 
     /* ═══ LAYOUT ═══ */
-    .layout{display:flex;padding-top:var(--nav-h);min-height:100vh}
+    .layout{display:flex;padding-top:var(--nav-h);min-height:100vh;overflow-x:hidden;}
 
     /* ─── SIDEBAR ─── */
     .sidebar{
@@ -104,7 +106,10 @@
       margin-left:var(--sidebar-w);flex:1;
       padding:0 3.5rem 8rem;
       max-width:900px;
+      min-width:0;
       position:relative;z-index:5;
+      overflow-wrap:break-word;
+      word-break:break-word;
     }
 
     /* ═══ SECTIONS ═══ */
@@ -146,7 +151,7 @@
       font-size:1rem;color:var(--glow);font-weight:600;
       margin:1.8rem 0 .6rem;letter-spacing:.05em;text-transform:uppercase;
     }
-    .doc-p{font-size:1.12rem;line-height:1.82;color:var(--dim);margin-bottom:1.1rem}
+    .doc-p{font-size:1.12rem;line-height:1.82;color:var(--dim);margin-bottom:1.1rem;overflow-wrap:break-word;word-break:break-word;}
     .doc-p a{color:var(--glow);text-decoration:none;border-bottom:1px solid rgba(168,217,127,.3);transition:color .2s,border-color .2s}
     .doc-p a:hover{color:var(--cream);border-color:var(--cream)}
 
@@ -180,12 +185,16 @@
 
     /* ─── Param table ─── */
     .param-table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:1.02rem}
-    .param-table th{text-align:left;padding:.55rem .9rem;font-size:.78rem;letter-spacing:.25em;text-transform:uppercase;color:var(--leaf);border-bottom:1px solid rgba(111,186,94,.2);font-weight:400}
+    .param-table th{text-align:left;padding:.55rem .9rem;font-size:.78rem;letter-spacing:.25em;text-transform:uppercase;color:var(--leaf);border-bottom:1px solid rgba(111,186,94,.2);font-weight:400;white-space:nowrap}
     .param-table td{padding:.6rem .9rem;border-bottom:1px solid rgba(111,186,94,.08);color:var(--dim);line-height:1.55;vertical-align:top}
     .param-table tr:last-child td{border-bottom:none}
+    .param-table td:first-child{white-space:nowrap;width:1%;padding-right:1.4rem}
     .param-table td.cmd-cell{display:flex;flex-direction:column;gap:.35rem}
     .param-table td.cmd-cell code.inline{display:inline-block}
-    .param-type{color:rgba(168,217,127,.6);font-family:'JetBrains Mono',monospace;font-size:.92rem}
+    .param-type{color:rgba(168,217,127,.6);font-family:'JetBrains Mono',monospace;font-size:.92rem;white-space:nowrap}
+    /* Variables table: also pin Availability column */
+    .param-table th:nth-child(2).avail-col,
+    .param-table td:nth-child(2).avail-col{white-space:nowrap;width:1%;padding-right:1.4rem}
 
     /* ─── Landing card grid ─── */
     .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin:1.5rem 0}
@@ -194,6 +203,62 @@
     .landing-card-icon{font-size:1.5rem;margin-bottom:.5rem}
     .landing-card-title{font-family:'Cinzel',serif;font-weight:700;font-size:.95rem;color:var(--cream);letter-spacing:.05em;margin-bottom:.3rem}
     .landing-card-desc{font-size:1rem;color:var(--stone);font-style:italic;line-height:1.5}
+
+    /* ─── Mobile sidebar toggle button ─── */
+    .sidebar-toggle{
+      display:none;
+      align-items:center;gap:.5rem;
+      background:rgba(20,14,8,.7);border:1px solid rgba(111,186,94,.25);border-radius:3px;
+      color:var(--glow);font-family:'Crimson Pro',serif;font-size:1rem;letter-spacing:.08em;
+      padding:.45rem 1rem;cursor:pointer;margin:0 0 1.5rem;
+      transition:background .2s,border-color .2s;
+    }
+    .sidebar-toggle:hover{background:rgba(111,186,94,.1);border-color:rgba(111,186,94,.45)}
+    .sidebar-toggle svg{width:16px;height:16px;fill:currentColor;flex-shrink:0;transition:transform .25s}
+    .sidebar-toggle.open svg{transform:rotate(180deg)}
+
+    /* ─── Mobile sidebar drawer overlay ─── */
+    .sidebar-overlay{
+      display:none;position:fixed;inset:0;z-index:90;
+      background:rgba(0,0,0,.5);backdrop-filter:blur(2px);
+    }
+    .sidebar-overlay.open{display:block}
+
+    /* ─── Table wrapper for horizontal scroll ─── */
+    .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1rem 0 1.5rem}
+    .table-wrap .param-table{margin:0}
+
+    /* ─── Mobile breakpoint ─── */
+    @media(max-width:860px){
+      nav{padding:0 1rem;height:var(--nav-h)}
+
+      .sidebar{
+        position:fixed;top:var(--nav-h);bottom:0;left:0;
+        width:min(80vw,280px);
+        transform:translateX(-105%);
+        transition:transform .28s cubic-bezier(.4,0,.2,1);
+        z-index:100;
+      }
+      .sidebar.open{transform:translateX(0)}
+
+      .content{
+        margin-left:0;
+        padding:0 1rem 6rem;
+      }
+
+      .sidebar-toggle{display:inline-flex}
+
+      .doc-section{padding-top:calc(var(--nav-h) + 1.5rem)}
+
+      .card-grid{grid-template-columns:1fr}
+
+      /* Make tables scroll horizontally */
+      .param-table{font-size:.92rem;min-width:520px}
+      .param-table th,.param-table td{padding:.5rem .6rem}
+
+      .code-block pre{font-size:.82rem}
+      code.inline{font-size:.82em}
+    }
   </style>
 </head>
 <body>
@@ -212,9 +277,11 @@
   </div>
 </nav>
 
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
 <div class="layout">
 
-  <aside class="sidebar">
+  <aside class="sidebar" id="sidebar">
     <div class="sidebar-section">
       <div class="sidebar-heading">Overview</div>
       <a class="sidebar-link" data-anchor="landing">Resources Home</a>
@@ -244,6 +311,10 @@
   </aside>
 
   <main class="content">
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle navigation">
+      <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 3h14v1.5H1zm0 4.25h14v1.5H1zm0 4.25h14v1.5H1z"/></svg>
+      Contents
+    </button>
 
     <!-- ══════ LANDING ══════ -->
     <span id="landing" class="doc-anchor"></span>
@@ -309,7 +380,7 @@
       <h2 class="doc-h2">Submitting a Completed Map</h2>
       <p class="doc-p">Use the following fields when submitting a finished map.</p>
 
-      <table class="param-table">
+      <div class="table-wrap"><table class="param-table">
         <thead><tr><th>Field</th><th>Details</th></tr></thead>
         <tbody>
           <tr><td><span class="param-name">Name</span></td><td>No spaces or special characters.</td></tr>
@@ -331,7 +402,7 @@
           </td></tr>
           <tr><td><span class="param-name">Video</span></td><td>Provide a video or clips of you beating the map, spliced checkpoint by checkpoint. If you do not want it public, Provide the video in #support.</td></tr>
         </tbody>
-      </table>
+      </table></div>
 
       <div class="callout callout-warn"><strong>Important:</strong> If the map is not yet on the server, please post the schematic or world file with coordinates of the build in #support. Mark where you teleport in (if you have a lobby), starting plate, end plates, and any triggers such as teleporters, launch pads, effect blocks with signs, etc. - these will be removed.</div>
     </section>
@@ -354,27 +425,27 @@
       <span id="atescript-syntax" class="doc-anchor"></span>
       <h2 class="doc-h2">Script Structure</h2>
       <p class="doc-p">Every script file is named after its purpose and ends in <code class="inline">.atescript</code>. Each script declares a trigger, a world, and then its logic. The following header fields are required at the top of every script:</p>
-      <table class="param-table">
+      <div class="table-wrap"><table class="param-table">
         <thead><tr><th>Field</th><th>Description</th></tr></thead>
         <tbody>
           <tr><td><span class="param-name">$trigger</span></td><td>How the script is triggered. See Triggers below.</td></tr>
           <tr><td><span class="param-name">$world</span></td><td>The trigger must occur in this world. AKA the adventure map it is for.</td></tr>
         </tbody>
-      </table>
+      </table></div>
 
       <!-- Variables -->
       <span id="atescript-variables" class="doc-anchor"></span>
       <h2 class="doc-h2">Variables</h2>
       <p class="doc-p"><code class="inline">$player</code> is automatically set to the player who triggered the script. Additional variables are available depending on the trigger used. This is clarified in the Triggers section below.</p>
-      <table class="param-table">
-        <thead><tr><th>Variable</th><th>Availability</th><th>Description</th></tr></thead>
+      <div class="table-wrap"><table class="param-table">
+        <thead><tr><th>Variable</th><th class="avail-col">Availability</th><th>Description</th></tr></thead>
         <tbody>
-          <tr><td><span class="param-name">$player</span></td><td>All triggers</td><td>The player who triggered the script.</td></tr>
-          <tr><td><span class="param-name">$btype</span></td><td>Block triggers</td><td>The block's material type. Comparing something to this follows the Spigot API https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html material naming convention: ACACIA_FENCE_GATE</td></tr>
-          <tr><td><span class="param-name">$blocation</span></td><td>Block triggers</td><td>The block's location. Comparing something to this follows the following naming convention: x,y,z</td></tr>
-          <tr><td><span class="param-name">$itype</span></td><td>Item triggers</td><td>The material of the item being held or interacted with. Comparing something to this follows the Spigot API https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html material naming convention: IRON_INGOT</td></tr>
+          <tr><td><span class="param-name">$player</span></td><td class="avail-col">All triggers</td><td>The player who triggered the script.</td></tr>
+          <tr><td><span class="param-name">$btype</span></td><td class="avail-col">Block triggers</td><td>The block's material type. Comparing something to this follows the Spigot API https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html material naming convention: ACACIA_FENCE_GATE</td></tr>
+          <tr><td><span class="param-name">$blocation</span></td><td class="avail-col">Block triggers</td><td>The block's location. Comparing something to this follows the following naming convention: x,y,z</td></tr>
+          <tr><td><span class="param-name">$itype</span></td><td class="avail-col">Item triggers</td><td>The material of the item being held or interacted with. Comparing something to this follows the Spigot API https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html material naming convention: IRON_INGOT</td></tr>
         </tbody>
-      </table>
+      </table></div>
 
       <!-- Logic & Commands -->
       <span id="atescript-commands" class="doc-anchor"></span>
@@ -402,20 +473,20 @@
 
       <h3 class="doc-h3">Data Storage</h3>
       <p class="doc-p">Persist data to a player using the <code class="inline">*</code> prefix. Data is stored in persistent data containers and survives across sessions.</p>
-      <table class="param-table">
+      <div class="table-wrap"><table class="param-table">
         <thead><tr><th>Command</th><th>Description</th></tr></thead>
         <tbody>
           <tr><td><span class="param-name">*store &lt;field&gt; &lt;value&gt;</span></td><td>Store a value under the given field name on the player.</td></tr>
           <tr><td><span class="param-name">*get &lt;field&gt;</span></td><td>Retrieve a stored value by field name.</td></tr>
           <tr><td><span class="param-name">*delete &lt;field&gt;</span></td><td>Delete a stored field from the player.</td></tr>
         </tbody>
-      </table>
+      </table></div>
 
       <!-- Triggers -->
       <span id="atescript-events" class="doc-anchor"></span>
       <h2 class="doc-h2">Triggers</h2>
       <p class="doc-p">Triggers define what event causes the script to run. Set the trigger at the top of the script with <code class="inline">$trigger &lt;name&gt;</code>.</p>
-      <table class="param-table">
+      <div class="table-wrap"><table class="param-table">
         <thead><tr><th>Trigger</th><th>When It Fires</th><th>Extra Variables</th></tr></thead>
         <tbody>
           <tr><td><span class="param-name">onBlockInteract</span></td><td>Player left-clicks on a block.</td><td><span class="param-type">$btype, $blocation</span></td></tr>
@@ -425,7 +496,7 @@
           <tr><td><span class="param-name">onPlateActivate</span></td><td>Player steps on a pressure plate.</td><td><span class="param-type">$btype, $blocation</span></td></tr>
           <tr><td><span class="param-name">onTeleport</span></td><td>Player teleports.</td><td>None</td></tr>
         </tbody>
-      </table>
+      </table></div>
 
       <!-- Examples -->
       <h2 class="doc-h2">Examples</h2>
@@ -464,7 +535,7 @@ $world DarkerBramble
 
       <span id="tools-block-triggers" class="doc-anchor"></span>
       <h2 class="doc-h2">Block Triggers</h2>
-      <table class="param-table">
+      <div class="table-wrap"><table class="param-table">
         <thead><tr><th>Tool</th><th>Description</th></tr></thead>
         <tbody>
           <tr><td><span class="param-name">Teleporters</span></td><td>Teleport a player once they step on a block. 
@@ -475,10 +546,10 @@ $world DarkerBramble
           <tr><td><span class="param-name">Launchers</span></td><td>General server and client performance optimisations.</td></tr>
           <tr><td><span class="param-name">Potion Effects</span></td><td>Performance tweaks and shader support for 1.8.9.</td></tr>
         </tbody>
-      </table>
+      </table></div>
       <span id="tools-world-settings" class="doc-anchor"></span>
       <h2 class="doc-h2">World Settings</h2>
-      <table class="param-table">
+      <div class="table-wrap"><table class="param-table">
         <thead><tr><th>Tool</th><th>Description</th><th>Commands</th></tr></thead>
         <tbody>
           <tr><td><span class="param-name">Breakable Blocks</span></td><td>Major rendering performance improvements.</td><td class="cmd-cell"><code class="inline">None</code></td></tr>
@@ -490,7 +561,7 @@ $world DarkerBramble
           <tr><td><span class="param-name">Practice</span></td><td>Performance tweaks and shader support for 1.8.9.</td><td class="cmd-cell"><code class="inline">/forcepractice [player], /forceunpractice [player]</code></td></tr>
 
         </tbody>
-      </table>
+      </table></div>
     </section>
   </main>
 </div>
@@ -536,6 +607,37 @@ anchors.forEach(a => observer.observe(a));
 
 // Default highlight on load
 setActive('landing');
+
+// ── Sidebar toggle (mobile) ───────────────────────
+(function(){
+  var toggle = document.getElementById('sidebarToggle');
+  var sidebar = document.getElementById('sidebar');
+  var overlay = document.getElementById('sidebarOverlay');
+  if(!toggle||!sidebar||!overlay) return;
+
+  function openSidebar(){
+    sidebar.classList.add('open');
+    overlay.classList.add('open');
+    toggle.classList.add('open');
+  }
+  function closeSidebar(){
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+    toggle.classList.remove('open');
+  }
+
+  toggle.addEventListener('click', function(){
+    sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+  });
+  overlay.addEventListener('click', closeSidebar);
+
+  // Close sidebar when a link is tapped on mobile
+  sidebar.querySelectorAll('[data-anchor]').forEach(function(el){
+    el.addEventListener('click', function(){
+      if(window.innerWidth <= 700) closeSidebar();
+    });
+  });
+})();
 </script>
 </body>
 </html>

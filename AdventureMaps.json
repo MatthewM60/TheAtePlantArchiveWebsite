@@ -3,6 +3,7 @@
     {
       "ID": 0,
       "allows_party": false,
+      "alt_creators": [],
       "completions": 5,
       "creators": [],
       "description": "Explore Rudeus and his body.",
@@ -12,6 +13,7 @@
       "gives_checkpoint": true,
       "has_multiple_endings": false,
       "has_start_plate": true,
+      "is_godmode": true,
       "is_hardcore": false,
       "is_singleplayer": false,
       "likes": 2,
@@ -41,6 +43,7 @@
     {
       "ID": 1,
       "allows_party": false,
+      "alt_creators": [],
       "completions": 11,
       "creators": [
         "36b6a5cd-7b40-4cd6-9ea4-672a7e29a1ea"
@@ -52,6 +55,7 @@
       "gives_checkpoint": true,
       "has_multiple_endings": false,
       "has_start_plate": true,
+      "is_godmode": true,
       "is_hardcore": false,
       "is_singleplayer": false,
       "likes": 3,
@@ -87,6 +91,7 @@
     {
       "ID": 2,
       "allows_party": false,
+      "alt_creators": [],
       "completions": 1,
       "creators": [
         "36b6a5cd-7b40-4cd6-9ea4-672a7e29a1ea"
@@ -98,6 +103,7 @@
       "gives_checkpoint": true,
       "has_multiple_endings": false,
       "has_start_plate": false,
+      "is_godmode": true,
       "is_hardcore": false,
       "is_singleplayer": false,
       "likes": 0,
@@ -126,7 +132,8 @@
     {
       "ID": 3,
       "allows_party": false,
-      "completions": 1,
+      "alt_creators": [],
+      "completions": 3,
       "creators": [
         "36b6a5cd-7b40-4cd6-9ea4-672a7e29a1ea"
       ],
@@ -137,9 +144,10 @@
       "gives_checkpoint": true,
       "has_multiple_endings": false,
       "has_start_plate": false,
+      "is_godmode": true,
       "is_hardcore": false,
       "is_singleplayer": false,
-      "likes": 0,
+      "likes": 2,
       "lobby_pitch": 0.0,
       "lobby_x": 0.5,
       "lobby_y": 65.0,
@@ -154,16 +162,18 @@
       "max_hardcore_deaths": 0,
       "name": "DarkBramble",
       "record_holders": [
+        "46139b86-3235-410e-832f-bfbfdaac1cb6",
         "36b6a5cd-7b40-4cd6-9ea4-672a7e29a1ea"
       ],
       "record_times": [
+        81161,
         128324,
-        -1,
         -1
       ],
       "shows_freeplay": false,
       "tags": [
         "Parkour",
+        "Outer Space",
         "Bad-Parkour"
       ],
       "world": "DarkBramble"
@@ -171,6 +181,7 @@
     {
       "ID": 4,
       "allows_party": false,
+      "alt_creators": [],
       "completions": 0,
       "creators": [
         "36b6a5cd-7b40-4cd6-9ea4-672a7e29a1ea"
@@ -182,6 +193,7 @@
       "gives_checkpoint": true,
       "has_multiple_endings": false,
       "has_start_plate": true,
+      "is_godmode": true,
       "is_hardcore": false,
       "is_singleplayer": false,
       "likes": 0,
@@ -210,6 +222,7 @@
     {
       "ID": 5,
       "allows_party": false,
+      "alt_creators": [],
       "completions": 1,
       "creators": [
         "36b6a5cd-7b40-4cd6-9ea4-672a7e29a1ea"
@@ -221,6 +234,7 @@
       "gives_checkpoint": true,
       "has_multiple_endings": false,
       "has_start_plate": false,
+      "is_godmode": true,
       "is_hardcore": false,
       "is_singleplayer": false,
       "likes": 1,
@@ -255,6 +269,9 @@
     {
       "ID": 6,
       "allows_party": false,
+      "alt_creators": [
+        "JM4s"
+      ],
       "completions": 0,
       "creators": [
         "36b6a5cd-7b40-4cd6-9ea4-672a7e29a1ea"
@@ -266,6 +283,7 @@
       "gives_checkpoint": true,
       "has_multiple_endings": false,
       "has_start_plate": true,
+      "is_godmode": true,
       "is_hardcore": false,
       "is_singleplayer": false,
       "likes": 0,
@@ -293,6 +311,7 @@
     {
       "ID": 7,
       "allows_party": false,
+      "alt_creators": [],
       "completions": 0,
       "creators": [
         "36b6a5cd-7b40-4cd6-9ea4-672a7e29a1ea"
@@ -304,6 +323,7 @@
       "gives_checkpoint": true,
       "has_multiple_endings": false,
       "has_start_plate": true,
+      "is_godmode": true,
       "is_hardcore": false,
       "is_singleplayer": false,
       "likes": 0,
@@ -332,6 +352,7 @@
     {
       "ID": 8,
       "allows_party": false,
+      "alt_creators": [],
       "completions": 0,
       "creators": [
         "36b6a5cd-7b40-4cd6-9ea4-672a7e29a1ea"
@@ -343,6 +364,7 @@
       "gives_checkpoint": true,
       "has_multiple_endings": false,
       "has_start_plate": true,
+      "is_godmode": true,
       "is_hardcore": false,
       "is_singleplayer": false,
       "likes": 0,
@@ -372,7 +394,8 @@
     {
       "ID": 9,
       "allows_party": false,
-      "completions": 0,
+      "alt_creators": [],
+      "completions": 1,
       "creators": [
         "36b6a5cd-7b40-4cd6-9ea4-672a7e29a1ea"
       ],
@@ -383,6 +406,7 @@
       "gives_checkpoint": true,
       "has_multiple_endings": false,
       "has_start_plate": true,
+      "is_godmode": true,
       "is_hardcore": false,
       "is_singleplayer": false,
       "likes": 0,
@@ -411,6 +435,9 @@
     {
       "ID": 10,
       "allows_party": false,
+      "alt_creators": [
+        "kateyharps"
+      ],
       "completions": 0,
       "creators": [
         "36b6a5cd-7b40-4cd6-9ea4-672a7e29a1ea"
@@ -422,6 +449,7 @@
       "gives_checkpoint": true,
       "has_multiple_endings": false,
       "has_start_plate": false,
+      "is_godmode": true,
       "is_hardcore": false,
       "is_singleplayer": false,
       "likes": 0,
@@ -451,6 +479,7 @@
     {
       "ID": 11,
       "allows_party": false,
+      "alt_creators": [],
       "completions": 0,
       "creators": [
         "36b6a5cd-7b40-4cd6-9ea4-672a7e29a1ea"
@@ -461,21 +490,22 @@
       "flair": "\u0026lMaple",
       "gives_checkpoint": true,
       "has_multiple_endings": false,
-      "has_start_plate": false,
+      "has_start_plate": true,
+      "is_godmode": true,
       "is_hardcore": false,
       "is_singleplayer": false,
       "likes": 0,
       "lobby_pitch": 40.3,
-      "lobby_x": 0.52,
-      "lobby_y": 65.0,
+      "lobby_x": -8.5,
+      "lobby_y": -5.0,
       "lobby_yaw": 1.0,
-      "lobby_z": -0.7,
+      "lobby_z": -2.0,
       "map_end_x": 20,
       "map_end_y": 56,
       "map_end_z": 46,
-      "map_start_x": 0,
-      "map_start_y": 0,
-      "map_start_z": 0,
+      "map_start_x": -9,
+      "map_start_y": -5,
+      "map_start_z": 4,
       "max_hardcore_deaths": 0,
       "name": "Maple",
       "record_holders": [],
@@ -491,6 +521,7 @@
     {
       "ID": 12,
       "allows_party": false,
+      "alt_creators": [],
       "completions": 0,
       "creators": [
         "36b6a5cd-7b40-4cd6-9ea4-672a7e29a1ea"
@@ -502,6 +533,7 @@
       "gives_checkpoint": true,
       "has_multiple_endings": false,
       "has_start_plate": false,
+      "is_godmode": true,
       "is_hardcore": false,
       "is_singleplayer": false,
       "likes": 0,
@@ -530,6 +562,9 @@
     {
       "ID": 13,
       "allows_party": false,
+      "alt_creators": [
+        "kateyharps"
+      ],
       "completions": 0,
       "creators": [
         "36b6a5cd-7b40-4cd6-9ea4-672a7e29a1ea"
@@ -541,6 +576,7 @@
       "gives_checkpoint": true,
       "has_multiple_endings": false,
       "has_start_plate": false,
+      "is_godmode": true,
       "is_hardcore": false,
       "is_singleplayer": false,
       "likes": 0,
@@ -569,6 +605,9 @@
     {
       "ID": 14,
       "allows_party": false,
+      "alt_creators": [
+        "kateyharps"
+      ],
       "completions": 0,
       "creators": [
         "36b6a5cd-7b40-4cd6-9ea4-672a7e29a1ea"
@@ -580,6 +619,7 @@
       "gives_checkpoint": true,
       "has_multiple_endings": false,
       "has_start_plate": false,
+      "is_godmode": true,
       "is_hardcore": false,
       "is_singleplayer": false,
       "likes": 0,
@@ -605,6 +645,264 @@
         "Joke-Map"
       ],
       "world": "Charlie"
+    },
+    {
+      "ID": 15,
+      "allows_party": true,
+      "alt_creators": [],
+      "completions": 9,
+      "creators": [
+        "36b6a5cd-7b40-4cd6-9ea4-672a7e29a1ea"
+      ],
+      "description": "Now darker and brambler than ever. An only sprint map made by someone who has never played only sprint.",
+      "difficulty": 5,
+      "dislikes": 0,
+      "flair": "\u00263\u0026lDarker Bramble",
+      "gives_checkpoint": true,
+      "has_multiple_endings": false,
+      "has_start_plate": true,
+      "is_godmode": true,
+      "is_hardcore": false,
+      "is_singleplayer": false,
+      "likes": 3,
+      "lobby_pitch": 23.0,
+      "lobby_x": -0.5,
+      "lobby_y": 113.0,
+      "lobby_yaw": 0.0,
+      "lobby_z": -8.5,
+      "map_end_x": 43,
+      "map_end_y": 42,
+      "map_end_z": 641,
+      "map_start_x": 0,
+      "map_start_y": 65,
+      "map_start_z": 2,
+      "max_hardcore_deaths": 0,
+      "name": "DarkerBramble",
+      "record_holders": [
+        "f3f4de6d-ae0e-4c8e-8c58-fd60438a52f0",
+        "46139b86-3235-410e-832f-bfbfdaac1cb6",
+        "7b2502d8-8d12-4d49-840b-745712a35935"
+      ],
+      "record_times": [
+        796196,
+        11797850,
+        12521898
+      ],
+      "shows_freeplay": true,
+      "tags": [
+        "Parkour",
+        "Outer Space",
+        "OnlySprint",
+        "Aim-Heavy"
+      ],
+      "world": "DarkerBramble"
+    },
+    {
+      "ID": 16,
+      "allows_party": true,
+      "alt_creators": [],
+      "completions": 0,
+      "creators": [
+        "c2505ed9-8600-4570-a73f-0af05972da4f"
+      ],
+      "description": "Charles... Charlie\u0027s spiritual successor.",
+      "difficulty": 5,
+      "dislikes": 0,
+      "flair": "\u0026a\u0026lCharles",
+      "gives_checkpoint": true,
+      "has_multiple_endings": false,
+      "has_start_plate": true,
+      "is_godmode": true,
+      "is_hardcore": false,
+      "is_singleplayer": true,
+      "likes": 0,
+      "lobby_pitch": 0.0,
+      "lobby_x": 0.5,
+      "lobby_y": 65.0,
+      "lobby_yaw": 0.0,
+      "lobby_z": 0.5,
+      "map_end_x": 1,
+      "map_end_y": 123,
+      "map_end_z": 90,
+      "map_start_x": 0,
+      "map_start_y": 65,
+      "map_start_z": 6,
+      "max_hardcore_deaths": 0,
+      "name": "Charles",
+      "record_holders": [],
+      "record_times": [],
+      "shows_freeplay": true,
+      "tags": [
+        "Parkour",
+        "Puzzle"
+      ],
+      "world": "Charles"
+    },
+    {
+      "ID": 17,
+      "allows_party": true,
+      "alt_creators": [],
+      "completions": 0,
+      "creators": [
+        "d7a62273-d1eb-43f6-a3db-35a9b51b16c6"
+      ],
+      "description": "Quite the hard map",
+      "difficulty": 6,
+      "dislikes": 0,
+      "flair": "\u00266\u0026lMr\u0026e\u0026lButtons",
+      "gives_checkpoint": true,
+      "has_multiple_endings": false,
+      "has_start_plate": false,
+      "is_godmode": true,
+      "is_hardcore": false,
+      "is_singleplayer": false,
+      "likes": 0,
+      "lobby_pitch": 0.0,
+      "lobby_x": 0.5,
+      "lobby_y": 94.0,
+      "lobby_yaw": 0.0,
+      "lobby_z": 2.5,
+      "map_end_x": 48,
+      "map_end_y": 134,
+      "map_end_z": 71,
+      "map_start_x": 0,
+      "map_start_y": 0,
+      "map_start_z": 0,
+      "max_hardcore_deaths": 0,
+      "name": "MrButtons",
+      "record_holders": [],
+      "record_times": [],
+      "shows_freeplay": true,
+      "tags": [
+        "Parkour",
+        "Anthropomorphic"
+      ],
+      "world": "MrButtons"
+    },
+    {
+      "ID": 18,
+      "allows_party": true,
+      "alt_creators": [
+        "kateyharps"
+      ],
+      "completions": 0,
+      "creators": [
+        "d7a62273-d1eb-43f6-a3db-35a9b51b16c6"
+      ],
+      "description": "Dance with me my friend! Show them you are worthy!",
+      "difficulty": 6,
+      "dislikes": 0,
+      "flair": "\u00264\u0026lGrimmer",
+      "gives_checkpoint": true,
+      "has_multiple_endings": false,
+      "has_start_plate": false,
+      "is_godmode": true,
+      "is_hardcore": false,
+      "is_singleplayer": false,
+      "likes": 0,
+      "lobby_pitch": 3.8,
+      "lobby_x": 3.37,
+      "lobby_y": 63.0,
+      "lobby_yaw": 44.9,
+      "lobby_z": 4.57,
+      "map_end_x": -15,
+      "map_end_y": 159,
+      "map_end_z": 74,
+      "map_start_x": 0,
+      "map_start_y": 0,
+      "map_start_z": 0,
+      "max_hardcore_deaths": 0,
+      "name": "Grimmer",
+      "record_holders": [],
+      "record_times": [],
+      "shows_freeplay": true,
+      "tags": [
+        "Parkour",
+        "Hollow Knight"
+      ],
+      "world": "Grimmer"
+    },
+    {
+      "ID": 19,
+      "allows_party": true,
+      "alt_creators": [],
+      "completions": 0,
+      "creators": [
+        "d7a62273-d1eb-43f6-a3db-35a9b51b16c6"
+      ],
+      "description": "From Epic Seven",
+      "difficulty": 6,
+      "dislikes": 0,
+      "flair": "\u0026lAria",
+      "gives_checkpoint": true,
+      "has_multiple_endings": false,
+      "has_start_plate": true,
+      "is_godmode": true,
+      "is_hardcore": false,
+      "is_singleplayer": false,
+      "likes": 0,
+      "lobby_pitch": -7.2,
+      "lobby_x": -16.47,
+      "lobby_y": 121.0,
+      "lobby_yaw": -171.3,
+      "lobby_z": -9.44,
+      "map_end_x": -10,
+      "map_end_y": 221,
+      "map_end_z": -118,
+      "map_start_x": -9,
+      "map_start_y": 132,
+      "map_start_z": -37,
+      "max_hardcore_deaths": 0,
+      "name": "Aria",
+      "record_holders": [],
+      "record_times": [],
+      "shows_freeplay": true,
+      "tags": [
+        "Parkour",
+        "Gacha"
+      ],
+      "world": "Aria"
+    },
+    {
+      "ID": 20,
+      "allows_party": true,
+      "alt_creators": [],
+      "completions": 0,
+      "creators": [
+        "d7a62273-d1eb-43f6-a3db-35a9b51b16c6"
+      ],
+      "description": "From Epic Seven",
+      "difficulty": 5,
+      "dislikes": 0,
+      "flair": "\u0026d\u0026lLuluca",
+      "gives_checkpoint": true,
+      "has_multiple_endings": false,
+      "has_start_plate": true,
+      "is_godmode": true,
+      "is_hardcore": false,
+      "is_singleplayer": false,
+      "likes": 0,
+      "lobby_pitch": 0.0,
+      "lobby_x": 0.5,
+      "lobby_y": 142.0,
+      "lobby_yaw": 180.0,
+      "lobby_z": -5.5,
+      "map_end_x": 7,
+      "map_end_y": 166,
+      "map_end_z": -97,
+      "map_start_x": 0,
+      "map_start_y": 142,
+      "map_start_z": -16,
+      "max_hardcore_deaths": 0,
+      "name": "Luluca",
+      "record_holders": [],
+      "record_times": [],
+      "shows_freeplay": true,
+      "tags": [
+        "Parkour",
+        "Gacha"
+      ],
+      "world": "Luluca"
     }
   ]
 }
