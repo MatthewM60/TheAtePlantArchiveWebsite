@@ -107,7 +107,7 @@
     .content{
       margin-left:var(--sidebar-w);flex:1;
       padding:0 3.5rem 8rem;
-      max-width:900px;
+      max-width:1100px;
       min-width:0;
       position:relative;z-index:5;
       overflow-wrap:break-word;
@@ -191,12 +191,23 @@
     .param-table td{padding:.6rem .9rem;border-bottom:1px solid rgba(111,186,94,.08);color:var(--dim);line-height:1.55;vertical-align:top}
     .param-table tr:last-child td{border-bottom:none}
     .param-table td:first-child{white-space:nowrap;width:1%;padding-right:1.4rem}
-    .param-table td.cmd-cell{display:flex;flex-direction:column;gap:.35rem}
+    .param-table td.cmd-cell{display:table-cell;vertical-align:top}
+    .param-table td.cmd-cell .cmd-stack{display:flex;flex-direction:column;gap:.35rem}
     .param-table td.cmd-cell code.inline{display:inline-block}
     .param-type{color:rgba(168,217,127,.6);font-family:'JetBrains Mono',monospace;font-size:.92rem;white-space:nowrap}
     /* Variables table: also pin Availability column */
     .param-table th:nth-child(2).avail-col,
     .param-table td:nth-child(2).avail-col{white-space:nowrap;width:1%;padding-right:1.4rem}
+
+    /* Override widths for tables that should match World Settings */
+    .param-table.match-world-settings td:first-child{white-space:normal;width:20%;padding-right:1.4rem}
+    .param-table.match-world-settings th:nth-child(1),
+    .param-table.match-world-settings td:nth-child(1){width:20%}
+    .param-table.match-world-settings th:nth-child(2),
+    .param-table.match-world-settings td:nth-child(2){width:45%}
+    .param-table.match-world-settings th:nth-child(3),
+    .param-table.match-world-settings td:nth-child(3){width:35%}
+    .param-table.match-world-settings{table-layout:fixed}
 
     /* ─── Landing card grid ─── */
     .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin:1.5rem 0}
@@ -296,8 +307,6 @@
     <div class="sidebar-section">
       <div class="sidebar-heading">Map Making</div>
       <a class="sidebar-link" data-anchor="mapmaking">Rules &amp; Guidelines</a>
-      <a class="sidebar-sub"  data-anchor="map-submission">Submission Template</a>
-      <a class="sidebar-sub"  data-anchor="mapmaking-submit">Submitting a Completed Map</a>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-heading">AteScript</div>
@@ -306,6 +315,7 @@
       <a class="sidebar-sub"  data-anchor="atescript-variables">Variables</a>
       <a class="sidebar-sub"  data-anchor="atescript-commands">Logic &amp; Commands</a>
       <a class="sidebar-sub"  data-anchor="atescript-events">Triggers</a>
+      <a class="sidebar-sub"  data-anchor="atescript-examples">Examples</a>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-heading">Tools</div>
@@ -358,55 +368,19 @@
       <!-- Priority 1 -->
       <h2 class="doc-h2">Priority 1: Gameplay</h2>
       <p class="doc-p">The number one priority is that the gameplay is <strong>high-effort</strong>, <strong>fun</strong>, and <strong>creative</strong>. Your map will not be accepted if it does not meet all three of these criteria. These will be judged loosely, especially the fun part.</p>
-      <p class="doc-p">If your map requires a plugin, datapack, resource pack, or command blocks that are necessary to how the map is played or enjoyed, you must let me know <strong>before you start building</strong> so I can approve it. If you want me to make a plugin, datapack, or resource pack for your map, just tell me.</p>
-      <div class="callout callout-info"><strong>Note:</strong> Maps can be about anything: parkour, puzzles, ice boat racing, etc.</div>
+      <p class="doc-p">If your map requires a plugin, script, resource pack, or command blocks that are necessary to how the map is played or enjoyed, you must ask <strong>@AtePlant</strong> or open a ticket in <strong>support</strong> before you start building so it can be approved. If you need to make a plugin, datapack, or resource pack for your map but do not know how to make one, just tell <strong>@AtePlant</strong> or open a ticket in <strong>support</strong>.</p>
+      <div class="callout callout-info"><strong>Note:</strong> Maps can be about anything. Parkour, puzzles, ice boat racing, etc.</div>
 
       <!-- Priority 2 -->
       <h2 class="doc-h2">Priority 2: Build Quality</h2>
-      <p class="doc-p">The build should be good. This does not mean your map requires a build to be accepted - floating parkour with some pixel art in the sky is totally fine. However, <strong>anything that is built should be high quality</strong>.</p>
-      <p class="doc-p">Do not use any existing map on this server as a frame-of-reference for quality.</p>
+      <p class="doc-p">The build should be good. This does not mean your map requires a build to be accepted. Floating parkour with some pixel art in the sky is totally fine. However, <strong>anything that is built should be high effort</strong>.</p>
+      <p class="doc-p">Do not use any existing map on this server as a frame-of-reference for quality. See the mapper wiki for potential mechanics you could use in your maps.</p>
 
-      <!-- Submission Template -->
-      <span id="map-submission" class="doc-anchor"></span>
-      <h2 class="doc-h2">Submission Template</h2>
+      <h2 class="doc-h2">What Does Mapper Rank Do?</h2>
+      <p class="doc-p">With Mapper rank, you get ownership of a plot on the server. A plot is a 500x500 world where you can build maps on, and it gives you access to building tools like WorldEdit, HeadDatabase (<code class="inline">/hdb</code>), Banner Maker (<code class="inline">/mb</code>), and other tools. Plots also have the capability to run specific gameplay mechanics; see the mapper wiki for the current list of supported mechanics.</p>
 
-      <h3 class="doc-h3">Is the map complete?</h3>
-      <p class="doc-p">There are no plot worlds on this server, so all building should be done elsewhere.</p>
-
-      <p class="doc-p">If your map requires server-side support to create the gameplay (custom plugins, AteScripts, resource packs, command blocks, etc.), provide the following. <strong>Make this post in #support - do not send it here.</strong></p>
-
-      <div class="callout callout-info">If the map looks high quality or the creators have enough street cred, it will be given its own world on the server to be built. If the map is not complete within two months of acceptance, the world will be saved, sent to the creators, and then deleted. Extensions are allowed.</div>
-
-      <!-- Complete map form -->
-      <span id="mapmaking-submit" class="doc-anchor"></span>
-      <h2 class="doc-h2">Submitting a Completed Map</h2>
-      <p class="doc-p">Use the following fields when submitting a finished map.</p>
-
-      <div class="table-wrap"><table class="param-table">
-        <thead><tr><th>Field</th><th>Details</th></tr></thead>
-        <tbody>
-          <tr><td><span class="param-name">Name</span></td><td>No spaces or special characters.</td></tr>
-          <tr><td><span class="param-name">Creators</span></td><td>List all creators. All creators must have joined the server at least once.</td></tr>
-          <tr><td><span class="param-name">Description</span></td><td>Brief description for the map. This will be shown in the map menu</td></tr>
-          <tr><td><span class="param-name">Tags</span></td><td>Subject to change to match existing tags. Max 5.</td></tr>
-          <tr><td><span class="param-name">Flair</span></td><td>How the map appears in the menu and when you start it. Can be completely different to the name. Spaces, special characters, and colors are allowed, same formatting as colored signs.</td></tr>
-          <tr><td><span class="param-name">Lobby</span></td><td>Does it have a lobby? A lobby is the area you are teleported to before the map, with a start plate that begins the map when stepped on. If No, the map starts immediately when you teleport in.</td></tr>
-          
-          <tr><td><span class="param-name">Additional Notes</span></td><td>Clarify the following (If left blank, it will be default to no):
-          <ul style="margin-top:.5rem;padding-left:1.2rem;display:flex;flex-direction:column;gap:.35rem">
-            <li>Does your map have multiple endings? If yes, your video must show you beating all endings.</li>
-            <li>Is the map singleplayer? If yes, can party members join? This is usually for co-op maps.</li>
-            <li>Is your map in hardcore mode? If yes, how many lives? Using a checkpoint in hardcore costs one life. If you run out of lives, you cannot play the map again for the rest of the day.</li>
-            <li>Is godmode enabled (can the player get hurt)?</li>
-            <li>Is practice enabled?</li>
-            <li>Does it use AteScripts? If yes, provide it here or make a separate post in #support with the script file included.</li>
-          </ul>
-          </td></tr>
-          <tr><td><span class="param-name">Video</span></td><td>Provide a video or clips of you beating the map, spliced checkpoint by checkpoint. If you do not want it public, Provide the video in #support.</td></tr>
-        </tbody>
-      </table></div>
-
-      <div class="callout callout-warn"><strong>Important:</strong> If the map is not yet on the server, please post the schematic or world file with coordinates of the build in #support. Mark where you teleport in (if you have a lobby), starting plate, end plates, and any triggers such as teleporters, launch pads, effect blocks with signs, etc. - these will be removed.</div>
+      <h2 class="doc-h2">How To Get Mapper Rank</h2>
+      <p class="doc-p">Make a post in Discord showing videos or pictures of builds, parkour, or gameplay you have created, and additional proof is appreciated. If your builds or gameplay seem high quality, you will receive Mapper rank in the Discord and receive a plot in game.</p>
     </section>
 
     <div class="section-divider"></div>
@@ -443,9 +417,11 @@
         <thead><tr><th>Variable</th><th class="avail-col">Availability</th><th>Description</th></tr></thead>
         <tbody>
           <tr><td><span class="param-name">$player</span></td><td class="avail-col">All triggers</td><td>The player who triggered the script.</td></tr>
-          <tr><td><span class="param-name">$btype</span></td><td class="avail-col">Block triggers</td><td>The block's material type. Comparing something to this follows the Spigot API https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html material naming convention: ACACIA_FENCE_GATE</td></tr>
-          <tr><td><span class="param-name">$blocation</span></td><td class="avail-col">Block triggers</td><td>The block's location. Comparing something to this follows the following naming convention: x,y,z</td></tr>
-          <tr><td><span class="param-name">$itype</span></td><td class="avail-col">Item triggers</td><td>The material of the item being held or interacted with. Comparing something to this follows the Spigot API https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html material naming convention: IRON_INGOT</td></tr>
+          <tr><td><span class="param-name">$plocation</span></td><td class="avail-col">All triggers</td><td>The player's current location.</td></tr>
+          <tr><td><span class="param-name">$btype</span></td><td class="avail-col">Block-related triggers</td><td>The block's material type.</td></tr>
+          <tr><td><span class="param-name">$blocation</span></td><td class="avail-col">Block-related triggers</td><td>The block's location.</td></tr>
+          <tr><td><span class="param-name">$itype</span></td><td class="avail-col">Item-related triggers</td><td>The material type of the item involved.</td></tr>
+          <tr><td><span class="param-name">$var</span></td><td class="avail-col">Single-value events</td><td>Misc string variable for one-off values (like potion effects in <code class="inline">onEffectAdd</code>).</td></tr>
         </tbody>
       </table></div>
 
@@ -478,7 +454,7 @@
       <div class="table-wrap"><table class="param-table">
         <thead><tr><th>Command</th><th>Description</th></tr></thead>
         <tbody>
-          <tr><td><span class="param-name">*store &lt;field&gt; &lt;value&gt;</span></td><td>Store a value under the given field name on the player.</td></tr>
+          <tr><td><span class="param-name">*store &lt;field&gt; &lt;value&gt;</span></td><td>Store an integer under the given field name on the player.</td></tr>
           <tr><td><span class="param-name">*get &lt;field&gt;</span></td><td>Retrieve a stored value by field name.</td></tr>
           <tr><td><span class="param-name">*delete &lt;field&gt;</span></td><td>Delete a stored field from the player.</td></tr>
         </tbody>
@@ -489,34 +465,58 @@
       <h2 class="doc-h2">Triggers</h2>
       <p class="doc-p">Triggers define what event causes the script to run. Set the trigger at the top of the script with <code class="inline">$trigger &lt;name&gt;</code>.</p>
       <div class="table-wrap"><table class="param-table">
-        <thead><tr><th>Trigger</th><th>When It Fires</th><th>Extra Variables</th></tr></thead>
+        <thead><tr><th>Trigger</th><th>When It Fires</th><th>Variables</th></tr></thead>
         <tbody>
-          <tr><td><span class="param-name">onBlockInteract</span></td><td>Player left-clicks on a block.</td><td><span class="param-type">$btype, $blocation</span></td></tr>
-          <tr><td><span class="param-name">onBlockBreak</span></td><td>Player breaks a block.</td><td><span class="param-type">$btype, $blocation</span></td></tr>
-          <tr><td><span class="param-name">onItemInteract</span></td><td>Player left-clicks while holding an item.</td><td><span class="param-type">$itype</span></td></tr>
-          <tr><td><span class="param-name">onItemPunch</span></td><td>Player punches while holding an item.</td><td><span class="param-type">$itype</span></td></tr>
-          <tr><td><span class="param-name">onPlateActivate</span></td><td>Player steps on a pressure plate.</td><td><span class="param-type">$btype, $blocation</span></td></tr>
-          <tr><td><span class="param-name">onTeleport</span></td><td>Player teleports.</td><td>None</td></tr>
+          <tr><td><span class="param-name">onBlockBreak</span></td><td>Player breaks a block.</td><td><code class="inline">$player</code>, <code class="inline">$plocation</code>, <code class="inline">$btype</code>, <code class="inline">$blocation</code></td></tr>
+          <tr><td><span class="param-name">onTeleport</span></td><td>Player teleports.</td><td><code class="inline">$player</code>, <code class="inline">$plocation</code></td></tr>
+          <tr><td><span class="param-name">onPlateActivate</span></td><td>Player steps on a pressure plate.</td><td><code class="inline">$player</code>, <code class="inline">$plocation</code>, <code class="inline">$btype</code>, <code class="inline">$blocation</code></td></tr>
+          <tr><td><span class="param-name">onWorldChange</span></td><td>Player changes world.</td><td><code class="inline">$player</code>, <code class="inline">$plocation</code></td></tr>
+          <tr><td><span class="param-name">onEffectAdd</span></td><td>Player receives a new potion effect.</td><td><code class="inline">$player</code>, <code class="inline">$plocation</code>, <code class="inline">$var</code> (var = Spigot PotionEffect)</td></tr>
+          <tr><td><span class="param-name">onPostPracticeStart</span></td><td>Practice mode starts.</td><td><code class="inline">$player</code>, <code class="inline">$plocation</code></td></tr>
+          <tr><td><span class="param-name">onPostPracticeEnd</span></td><td>Practice mode ends.</td><td><code class="inline">$player</code>, <code class="inline">$plocation</code></td></tr>
+          <tr><td><span class="param-name">onCheckpointUse</span></td><td>Player uses a checkpoint.</td><td><code class="inline">$player</code>, <code class="inline">$plocation</code></td></tr>
         </tbody>
       </table></div>
+      <div class="callout callout-info"><strong>Note:</strong> This is the current trigger list. Use the <code class="inline">therunscript</code> method to see which variables each event exposes.</div>
 
       <!-- Examples -->
+      <span id="atescript-examples" class="doc-anchor"></span>
       <h2 class="doc-h2">Examples</h2>
+      <p class="doc-p">These examples are all from the map Darker Bramble.</p>
 
       <div class="code-block">
-        <div class="code-label">drb_CyanWool.atescript - Give cyan wool on breaking a specific block</div>
-        <pre>$trigger onBlockBreak
+        <div class="code-label">drb_MusicP1.atescript - Play music on the initial fall from your ship</div>
+        <pre>$trigger onEffectAdd
 $world DarkerBramble
-endif $btype isnot CHISELED_RESIN_BRICKS
-/give $player cyan_wool[can_place_on=[{blocks:cyan_glazed_terracotta}]] 1</pre>
+endif $var isnot SLOW_FALLING
+/musicplayer play $player outerwildsp1.nbs true</pre>
       </div>
 
       <div class="code-block">
-        <div class="code-label">drb_TeleportRemoval.atescript - Clear items on teleport</div>
-        <pre>$trigger onTeleport
+        <div class="code-label">drb_PracticeItems.atescript - Give items that help with practice</div>
+        <pre>$trigger onPostPracticeStart
 $world DarkerBramble
-/clear $player minecraft:purple_wool
-/clear $player minecraft:cyan_wool</pre>
+/minecraft:give $player purple_wool[can_place_on=[{blocks:purple_glazed_terracotta}]] 64
+/minecraft:give $player cyan_wool[can_place_on=[{blocks:cyan_glazed_terracotta}]] 64
+/minecraft:give $player copper_hoe[custom_name=[{"text":"Ghost Matter Harvester","bold":true,"italic":false,"color":"dark_aqua"}],lore=[[{"text":"Used to destroy ","italic":false,"color":"white"},{"text":"O","italic":false,"color":"gold"},{"text":"r","italic":false,"color":"gold"},{"text":"a","italic":false,"color":"gold"},{"text":"nge","italic":false,"color":"gold"},{"text":" ","italic":false,"color":"gold"},{"text":"Ghost","italic":false,"color":"gold"}],[{"text":"Matter","italic":false,"color":"gold"},{"text":" temporarily (3s)","italic":false,"color":"white"}]],can_break=[{blocks:resin_block},{blocks:chiseled_resin_bricks}],tool={rules:[{blocks:[resin_block,chiseled_resin_bricks],speed:999f}]},unbreakable={},tooltip_display={hidden_components:[attribute_modifiers]}]
+/minecraft:give $player iron_hoe[custom_name=[{"text":"Ghost Matter Harvester","bold":true,"italic":false,"color":"light_purple"}],lore=[[{"text":"Used to destroy ","italic":false,"color":"white"},{"text":"Gray Ghost","italic":false,"color":"gray"}],[{"text":"Matter","italic":false,"color":"gray"},{"text":" temporarily (1s)","italic":false,"color":"white"}]],can_break=[{blocks:pale_moss_block},{blocks:chiseled_tuff}],tool={rules:[{blocks:[pale_moss_block,chiseled_tuff],speed:999f}]},unbreakable={},tooltip_display={hidden_components:[attribute_modifiers]}]</pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-label">drb_TeleportRemoval.atescript - Clear collected wools on checkpoint use</div>
+        <pre>$trigger onCheckpointUse
+$world DarkerBramble
+/minecraft:clear $player minecraft:purple_wool
+/minecraft:clear $player minecraft:cyan_wool</pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-label">drb_PlateRemoval.atescript - Clear collected wool when stepping on mangrove pressure plates</div>
+        <pre>$trigger onPlateActivate
+$world DarkerBramble
+endif $btype isnot MANGROVE_PRESSURE_PLATE
+/minecraft:clear $player minecraft:purple_wool
+/minecraft:clear $player minecraft:cyan_wool</pre>
       </div>
 
     </section>
@@ -549,19 +549,90 @@ $world DarkerBramble
           <tr><td><span class="param-name">Potion Effects</span></td><td>Performance tweaks and shader support for 1.8.9.</td></tr>
         </tbody>
       </table></div>
-      <span id="tools-world-settings" class="doc-anchor"></span>
-      <h2 class="doc-h2">World Settings</h2>
-      <div class="table-wrap"><table class="param-table">
+
+      <h2 class="doc-h2">Server Tools</h2>
+      <div class="table-wrap"><table class="param-table match-world-settings">
+        <colgroup>
+          <col style="width:20%">
+          <col style="width:45%">
+          <col style="width:35%">
+        </colgroup>
         <thead><tr><th>Tool</th><th>Description</th><th>Commands</th></tr></thead>
         <tbody>
-          <tr><td><span class="param-name">Breakable Blocks</span></td><td>Major rendering performance improvements.</td><td class="cmd-cell"><code class="inline">None</code></td></tr>
-          <tr><td><span class="param-name">Item Box</span></td><td>General server and client performance optimisations.</td><td class="cmd-cell"><code class="inline">None</code></td></tr>
-          <tr><td><span class="param-name">Only Sprint</span></td><td>Performance tweaks and shader support for 1.8.9.</td><td class="cmd-cell"><code class="inline">None</code></td></tr>
-          <tr><td><span class="param-name">Timer Block</span></td><td>Performance tweaks and shader support for 1.8.9.</td><td class="cmd-cell"><code class="inline">None</code></td></tr>
-          <tr><td><span class="param-name">Trapdoor Clutch</span></td><td>Performance tweaks and shader support for 1.8.9.</td><td class="cmd-cell"><code class="inline">None</code></td></tr>
-          <tr><td><span class="param-name">Sudoku</span></td><td>Performance tweaks and shader support for 1.8.9.</td><td class="cmd-cell"><code class="inline">/startsudoku [id] [player], /endsudoku [player]</code></td></tr>
-          <tr><td><span class="param-name">Practice</span></td><td>Performance tweaks and shader support for 1.8.9.</td><td class="cmd-cell"><code class="inline">/forcepractice [player], /forceunpractice [player]</code></td></tr>
+          <tr>
+            <td><span class="param-name">Teleporter</span></td>
+            <td>Stores teleporter configurations and locations; handles creating, using and deleting teleporters. If locked teleporters are enabled and there is a chest 2 blocks under the pad, the teleporter requires the items in that chest to use. A barrier item before an item means the pad will not consume it; a structure_void entry means any item in the chest will allow teleporting.</td>
+            <td class="cmd-cell"><div class="cmd-stack"><div style="max-width:420px; overflow-x:auto;"><code class="inline" style="white-space:pre">None</code></div></div></td>
+          </tr>
+          <tr>
+            <td><span class="param-name">Launcher</span></td>
+            <td>Stores launcher configurations/locations and handles creating, using and deleting launchers.</td>
+            <td class="cmd-cell"><div class="cmd-stack"><div style="max-width:420px; overflow-x:auto;"><code class="inline" style="white-space:pre">None</code></div></div></td>
+          </tr>
+          <tr>
+            <td><span class="param-name">Potion Block</span></td>
+            <td>Manages PotionBlock locations and interactions (use/create/delete). Includes a server-side command for granting night vision from configured potion blocks.</td>
+            <td class="cmd-cell"><div class="cmd-stack"><div style="max-width:420px; overflow-x:auto;"><code class="inline" style="white-space:pre">None</code></div></div></td>
+          </tr>
+          <tr>
+            <td><span class="param-name">Checkpoint</span></td>
+            <td>Stores checkpoint locations and handles all checkpoint interactions. Create a checkpoint sign by writing "checkpoint" on the second line of a sign.</td>
+            <td class="cmd-cell"><div class="cmd-stack"><div style="max-width:420px; overflow-x:auto;"><code class="inline" style="white-space:pre">/givecheckpointitem &lt;player&gt;</code></div><div style="max-width:420px; overflow-x:auto;"><code class="inline" style="white-space:pre">/removecheckpointitem &lt;player&gt;</code></div><div style="max-width:420px; overflow-x:auto;"><code class="inline" style="white-space:pre">/setcheckpoint &lt;player&gt;</code></div><div style="max-width:420px; overflow-x:auto;"><code class="inline" style="white-space:pre">/removecheckpoint &lt;player&gt;</code></div><div style="max-width:420px; overflow-x:auto;"><code class="inline" style="white-space:pre">/togglecheckpointmessages &lt;player&gt;</code></div><div style="max-width:420px; overflow-x:auto;"><code class="inline" style="white-space:pre">/hidecheckpointmessages &lt;player&gt;</code></div><div style="max-width:420px; overflow-x:auto;"><code class="inline" style="white-space:pre">/showcheckpointmessages &lt;player&gt;</code></div></div></td>
+          </tr>
+          <tr>
+            <td><span class="param-name">Banner Maker</span></td>
+            <td>Gives premade banners for letters, numbers and directional arrows (up/down/left/right).</td>
+            <td class="cmd-cell"><div class="cmd-stack"><div style="max-width:420px; overflow-x:auto;"><code class="inline" style="white-space:pre">/mb &lt;word|direction&gt; &lt;bg color&gt; &lt;text color&gt;</code></div></div></td>
+          </tr>
+        </tbody>
+      </table></div>
 
+      <span id="tools-world-settings" class="doc-anchor"></span>
+      <h2 class="doc-h2">World Settings</h2>
+      <div class="note doc-p">Note: AteScripts can reference any command listed in the table below.</div>
+      <div class="table-wrap"><table class="param-table match-world-settings">
+        <colgroup>
+          <col style="width:20%">
+          <col style="width:45%">
+          <col style="width:35%">
+        </colgroup>
+        <thead><tr><th>Setting</th><th>Description</th><th>Commands</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="param-name">Trapdoor Clutch</span></td>
+            <td>Enabled doors, trapdoors and gates flip open for a tick then are temporarily disabled (turn to iron/air) for a short period before reverting to their normal state.</td>
+            <td class="cmd-cell"><div class="cmd-stack"><div style="max-width:420px; overflow-x:auto;"><code class="inline" style="white-space:pre">None</code></div></div></td>
+          </tr>
+          <tr>
+            <td><span class="param-name">Timer Block</span></td>
+            <td>Step on a pale_oak_pressure_plate with a chest 2 blocks below to start a timer using the number of items in the chest. When the timer ends it triggers the configured checkpoint action.</td>
+            <td class="cmd-cell"><div class="cmd-stack"><div style="max-width:420px; overflow-x:auto;"><code class="inline" style="white-space:pre">None</code></div></div></td>
+          </tr>
+          <tr>
+            <td><span class="param-name">Practice</span></td>
+            <td>Practice mode for jumps: enables flight and restricts interaction with certain blocks/triggers. Specific blocks/triggers (launchpads, tppads, doors, etc.) can be toggled for practice sessions.</td>
+            <td class="cmd-cell"><div class="cmd-stack"><div style="max-width:420px; overflow-x:auto;"><code class="inline" style="white-space:pre">None</code></div></div></td>
+          </tr>
+          <tr>
+            <td><span class="param-name">Only Sprint</span></td>
+            <td>When enabled on a map, the player's checkpoint is used whenever they stop sprinting.</td>
+            <td class="cmd-cell"><div class="cmd-stack"><div style="max-width:420px; overflow-x:auto;"><code class="inline" style="white-space:pre">None</code></div></div></td>
+          </tr>
+          <tr>
+            <td><span class="param-name">Item Box</span></td>
+            <td>Step on a polished_blackstone_pressure_plate with a container 2 blocks below to receive items from that container. A barrier item in the chest clears the player's inventory first; a structure_void behaves like a barrier but preserves subsequent item types based on the structure_void stack amount.</td>
+            <td class="cmd-cell"><div class="cmd-stack"><div style="max-width:420px; overflow-x:auto;"><code class="inline" style="white-space:pre">None</code></div></div></td>
+          </tr>
+          <tr>
+            <td><span class="param-name">Breakable Blocks</span></td>
+            <td>Broken blocks can reappear after a configured delay. Holding a block toggles whether it will respawn if broken in that world. Time values are specified in seconds.</td>
+            <td class="cmd-cell"><div class="cmd-stack"><div style="max-width:420px; overflow-x:auto;"><code class="inline" style="white-space:pre">None</code></div></div></td>
+          </tr>
+          <tr>
+            <td><span class="param-name">Block Clutch</span></td>
+            <td>Wool blocks disappear shortly after being placed. Timing varies by color: P,R,O,Y = instant; L,G,LB,B = 1s; C,M,P,B = 2.5s; BL,G,LG,W = 5s.</td>
+            <td class="cmd-cell"><div class="cmd-stack"><div style="max-width:420px; overflow-x:auto;"><code class="inline" style="white-space:pre">None</code></div></div></td>
+          </tr>
         </tbody>
       </table></div>
     </section>
